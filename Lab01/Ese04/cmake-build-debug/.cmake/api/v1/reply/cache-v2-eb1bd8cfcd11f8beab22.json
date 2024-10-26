@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "e:/UNI/2^ANNO/Algoritmi e strutture dati/Lab/Lab01/Ese03/cmake-build-debug"
+			"value" : "e:/UNI/2^ANNO/Algoritmi e strutture dati/Lab/Lab01/Ese04/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -431,7 +431,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "E:/UNI/2^ANNO/Algoritmi e strutture dati/Lab/Lab01/Ese03/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "E:/UNI/2^ANNO/Algoritmi e strutture dati/Lab/Lab01/Ese04/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -503,7 +503,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "E:/UNI/2^ANNO/Algoritmi e strutture dati/Lab/Lab01/Ese03"
+			"value" : "E:/UNI/2^ANNO/Algoritmi e strutture dati/Lab/Lab01/Ese04"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -515,7 +515,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "C:/Program Files (x86)/Ese03"
+			"value" : "C:/Program Files (x86)/Ese04"
 		},
 		{
 			"name" : "CMAKE_LINKER",
@@ -731,7 +731,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "Ese03"
+			"value" : "Ese04"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1126,7 +1126,7 @@
 			"value" : "FALSE"
 		},
 		{
-			"name" : "Ese03_BINARY_DIR",
+			"name" : "Ese04_BINARY_DIR",
 			"properties" : 
 			[
 				{
@@ -1135,10 +1135,10 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "E:/UNI/2^ANNO/Algoritmi e strutture dati/Lab/Lab01/Ese03/cmake-build-debug"
+			"value" : "E:/UNI/2^ANNO/Algoritmi e strutture dati/Lab/Lab01/Ese04/cmake-build-debug"
 		},
 		{
-			"name" : "Ese03_IS_TOP_LEVEL",
+			"name" : "Ese04_IS_TOP_LEVEL",
 			"properties" : 
 			[
 				{
@@ -1150,7 +1150,7 @@
 			"value" : "ON"
 		},
 		{
-			"name" : "Ese03_SOURCE_DIR",
+			"name" : "Ese04_SOURCE_DIR",
 			"properties" : 
 			[
 				{
@@ -1159,7 +1159,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "E:/UNI/2^ANNO/Algoritmi e strutture dati/Lab/Lab01/Ese03"
+			"value" : "E:/UNI/2^ANNO/Algoritmi e strutture dati/Lab/Lab01/Ese04"
 		},
 		{
 			"name" : "_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED",

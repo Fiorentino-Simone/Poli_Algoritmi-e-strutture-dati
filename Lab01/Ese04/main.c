@@ -23,13 +23,14 @@ typedef struct corsa {
 int leggiDati(char *filename, corsa_t *corse);
 comando_e leggiComando ();
 void stampaLog(corsa_t *corse, int dim);
-void ordCorsePerData(corsa_t *corse, int dim);
-void ordCorsePerTratta(corsa_t *corse, int dim);
-void ordCorsePerPartenza(corsa_t *corse, int dim);
-void ordCorsePerDest(corsa_t *corse, int dim);
+void stampa_record(corsa_t **corse, int dim);
+void ordRifCorsePerData(corsa_t *elRif0[], int dim);
+void ordRifCorsePerTratta(corsa_t *elRif1[], int dim);
+void ordRifCorsePerPartenza(corsa_t *elRif2[], int dim);
+void ordRifCorsePerDest(corsa_t *elRif3[], int dim);
 
-void ricerca_lineare(corsa_t *corse, int dim, char *stazione_ricerca, int len);
-void ricerca_dicotomica(corsa_t *corse, int dim, char *stazione_ricerca);
+void ricerca_lineare(corsa_t corse[], int dim, char *stazione_ricerca, int len);
+void ricerca_dicotomica(corsa_t **corse, int dim, char *stazione_ricerca);
 
 int main() {
     // DICHIARAZIONE
@@ -39,32 +40,38 @@ int main() {
 
     char stazione_ricerca[MAXL];
 
+    // VETTORI DI PUNTATORI PER ORDINAMENTI
+    corsa_t *elRif0[MAXN], *elRif1[MAXN], *elRif2[MAXN], *elRif3[MAXN];
+
     int dim = leggiDati("corse.txt", corse);
+
+    for (int i = 0; i < dim; i++){
+        elRif0[i] = elRif1[i] = elRif2[i] = elRif3[i] = &corse[i];
+    }
 
     while(continua){
         comando = leggiComando();
         switch (comando) {
             case r_stampa: stampaLog(corse, dim); break;
-            ///case r_ordData: ordCorsePerData(corse, dim); break;
+            ///case r_ordData: ordRifCorsePerData(elRif0, dim); break;
             case r_ordCod:
-                ordCorsePerTratta(corse, dim);
-                stampaLog(corse, dim);
+                ordRifCorsePerTratta(elRif1, dim);
+                stampa_record(elRif1, dim);
                 break;
             case r_ordPartenza:
-                ordCorsePerPartenza(corse, dim);
-                stampaLog(corse, dim);
+                ordRifCorsePerPartenza(elRif2, dim);
+                stampa_record(elRif2, dim);
                 break;
             case r_ordDestinazione:
-                ordCorsePerDest(corse, dim);
-                stampaLog(corse, dim);
+                ordRifCorsePerDest(elRif3, dim);
+                stampa_record(elRif3, dim);
                 break;
             case r_ricercaPartenza:
                 printf("Inserisci la stazione di partenza da cercare: ");
                 scanf("%s", stazione_ricerca);
-                //ricerca_lineare(corse, dim, stazione_ricerca, strlen(stazione_ricerca));
-                ordCorsePerPartenza(corse, dim);
-                ricerca_dicotomica(corse, dim, stazione_ricerca);
-                break;
+                // ricerca_lineare(corse, dim, stazione_ricerca, strlen(stazione_ricerca));
+                ordRifCorsePerPartenza(elRif2, dim);
+                ricerca_dicotomica(elRif2, dim, stazione_ricerca);
             case r_fine: continua = 0; break;
             default: printf("Comando errato!"); break;
         }
@@ -136,53 +143,66 @@ void stampaLog(corsa_t *corse, int dim){
     }
 }
 
-void ordCorsePerTratta(corsa_t *corse, int dim){
-    corsa_t temp;
+void stampa_record(corsa_t **corse, int dim){
+    for (int i=0; i<dim; i++){
+        printf("Codice Tratta: %s, Partenza: %s, Destinazione: %s, Data: %s, Arrivo: %s, Partenza: %s, Ritardo: %d",
+               corse[i]->codice_tratta,
+               corse[i]->partenza,
+               corse[i]->destinazione,
+               corse[i]->data,
+               corse[i]->ora_arrivo,
+               corse[i]->ora_partenza,
+               corse[i]->ritardo);
+        printf("\n");
+    }
+}
+
+void ordRifCorsePerTratta(corsa_t *elRif1[], int dim){
+    corsa_t *temp;
     int l = 0, r = dim - 1;
 
     for (int i = l; i < r; i++) {
         for (int j = l; j < r - i +l; j++) {
-            if(strcmp(corse[j].codice_tratta, corse[j+1].codice_tratta) > 0){
-                temp = corse[j];
-                corse[j] = corse[j+1];
-                corse[j+1] = temp;
+            if(strcmp(elRif1[j]->codice_tratta, elRif1[j+1]->codice_tratta) > 0){
+                temp = elRif1[j];
+                elRif1[j] = elRif1[j+1];
+                elRif1[j+1] = temp;
             }
         }
     }
 }
 
-void ordCorsePerPartenza(corsa_t *corse, int dim){
-    corsa_t temp;
+void ordRifCorsePerPartenza(corsa_t *elRif2[], int dim){
+    corsa_t *temp;
     int l = 0, r = dim - 1;
 
     for (int i = l; i < r; i++) {
         for (int j = l; j < r - i +l; j++) {
-            if(strcmp(corse[j].partenza, corse[j+1].partenza) > 0){
-                temp = corse[j];
-                corse[j] = corse[j+1];
-                corse[j+1] = temp;
+            if(strcmp(elRif2[j]->partenza, elRif2[j+1]->partenza) > 0){
+                temp = elRif2[j];
+                elRif2[j] = elRif2[j+1];
+                elRif2[j+1] = temp;
             }
         }
     }
 }
 
-void ordCorsePerDest(corsa_t *corse, int dim){
-    corsa_t temp;
+void ordRifCorsePerDest(corsa_t *elRif3[], int dim){
+    corsa_t *temp;
     int l = 0, r = dim - 1;
 
     for (int i = l; i < r; i++) {
         for (int j = l; j < r - i +l; j++) {
-            if(strcmp(corse[j].destinazione, corse[j+1].destinazione) > 0){
-                temp = corse[j];
-                corse[j] = corse[j+1];
-                corse[j+1] = temp;
+            if(strcmp(elRif3[j]->destinazione, elRif3[j+1]->destinazione) > 0){
+                temp = elRif3[j];
+                elRif3[j] = elRif3[j+1];
+                elRif3[j+1] = temp;
             }
         }
     }
 }
 
-void ricerca_lineare(corsa_t *corse, int dim, char *stazione_ricerca, int len){
-    int trovato = -1;
+void ricerca_lineare(corsa_t corse[], int dim, char *stazione_ricerca, int len){
     for (int i = 0; i < dim; ++i) {
         if(strncmp(corse[i].partenza, stazione_ricerca, len) == 0){
             printf("Codice Tratta: %s, Partenza: %s, Destinazione: %s, Data: %s, Arrivo: %s, Partenza: %s, Ritardo: %d",
@@ -194,41 +214,36 @@ void ricerca_lineare(corsa_t *corse, int dim, char *stazione_ricerca, int len){
                    corse[i].ora_partenza,
                    corse[i].ritardo);
             printf("\n");
-            trovato = 0;
         }
-    }
-
-    if(trovato == -1){
-        printf("Nessuna tratta trovata per la stazione di partenza: %s\n", stazione_ricerca);
     }
 }
 
-void ricerca_dicotomica(corsa_t *corse, int dim, char *prefisso){
+void ricerca_dicotomica(corsa_t **corse, int dim, char *prefisso){
     int sinistra = 0, destra = dim - 1, trovato = 0;
 
     while (sinistra <= destra) {
         int centro = (sinistra + destra) / 2;
-        if (strncmp(corse[centro].partenza, prefisso, strlen(prefisso)) == 0) {
+        if (strncmp(corse[centro]->partenza, prefisso, strlen(prefisso)) == 0) {
             trovato = 1;
 
             int i = centro;
-            while (i > 0 && strncmp(corse[i - 1].partenza, prefisso, strlen(prefisso)) == 0) {
+            while (i > 0 && strncmp(corse[i - 1]->partenza, prefisso, strlen(prefisso)) == 0) {
                 i--;
             }
-            while (i < dim && strncmp(corse[i].partenza, prefisso, strlen(prefisso)) == 0) {
+            while (i < dim && strncmp(corse[i]->partenza, prefisso, strlen(prefisso)) == 0) {
                 printf("Codice Tratta: %s, Partenza: %s, Destinazione: %s, Data: %s, Arrivo: %s, Partenza: %s, Ritardo: %d",
-                       corse[i].codice_tratta,
-                       corse[i].partenza,
-                       corse[i].destinazione,
-                       corse[i].data,
-                       corse[i].ora_arrivo,
-                       corse[i].ora_partenza,
-                       corse[i].ritardo);
+                       corse[i]->codice_tratta,
+                       corse[i]->partenza,
+                       corse[i]->destinazione,
+                       corse[i]->data,
+                       corse[i]->ora_arrivo,
+                       corse[i]->ora_partenza,
+                       corse[i]->ritardo);
                 printf("\n");
                 i++;
             }
             break;
-        } else if (strcmp(corse[centro].partenza, prefisso) < 0) {
+        } else if (strcmp(corse[centro]->partenza, prefisso) < 0) {
             sinistra = centro + 1;
         } else {
             destra = centro - 1;
