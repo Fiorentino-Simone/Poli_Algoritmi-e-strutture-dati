@@ -28,12 +28,6 @@ int main() {
 }
 
 //FUNCTIONS
-
-/*
- * @params
- * il parametro src rappresenta la stringa sorgente in cui cercare.
-   il parametro regexp rappresenta l'espressione regolare da cercare.
-*/
 char *cercaRegexp(char *src, char *regex) {
 
     /* ELENCO METACARATTERI:

@@ -4,6 +4,7 @@
 
 #define MAXL 30
 
+// TYPEDEF
 typedef enum {
     r_stampa, r_ordData, r_ordCod, r_ordPartenza, r_ordDestinazione, r_ricercaPartenza, r_leggiFile, r_fine, r_err
 } comando_e;
@@ -19,10 +20,11 @@ typedef struct corsa {
 } corsa_t;
 
 // PROTOTIPI
-int leggiDati(char *filename, corsa_t **corse);
-comando_e leggiComando ();
-void stampaLog(corsa_t *corse, int dim);
+int leggi_dati(char *filename, corsa_t **corse);
+comando_e leggi_comando();
+void stampa_log(corsa_t *corse, int dim);
 void stampa_record(corsa_t **corse, int dim);
+
 void ordRifCorsePerData(corsa_t *elRif0[], int dim);
 void ordRifCorsePerTratta(corsa_t *elRif1[], int dim);
 void ordRifCorsePerPartenza(corsa_t *elRif2[], int dim);
@@ -46,14 +48,15 @@ int main() {
     // VETTORI DI PUNTATORI PER ORDINAMENTI
     corsa_t **elRif0, **elRif1, **elRif2, **elRif3;
 
-    int dim = leggiDati("corse.txt", &corse);
+    int dim = leggi_dati("corse.txt", &corse);
 
     alloca_rif(&elRif0, &elRif1, &elRif2, &elRif3, corse, dim);
 
     while(continua){
-        comando = leggiComando();
+        int scelta;
+        comando = leggi_comando();
         switch (comando) {
-            case r_stampa: stampaLog(corse, dim); break;
+            case r_stampa: stampa_log(corse, dim); break;
             case r_ordData: 
                 ordRifCorsePerData(elRif0, dim); 
                 stampa_record(elRif0, dim);
@@ -73,16 +76,22 @@ int main() {
             case r_ricercaPartenza:
                 printf("Inserisci la stazione di partenza da cercare: ");
                 scanf("%s", stazione_ricerca);
-                // ricerca_lineare(corse, dim, stazione_ricerca, strlen(stazione_ricerca));
-                ordRifCorsePerPartenza(elRif2, dim);
-                ricerca_dicotomica(elRif2, dim, stazione_ricerca);
+
+                printf("Inserisci 1 per la ricerca lineare oppure 2 per la ricerca dicotomica: ");
+                scanf("%d", &scelta);
+                if(scelta == 1){
+                    ricerca_lineare(corse, dim, stazione_ricerca, strlen(stazione_ricerca));
+                } else if(scelta == 2) {
+                    ordRifCorsePerPartenza(elRif2, dim);
+                    ricerca_dicotomica(elRif2, dim, stazione_ricerca);
+                }
                 break;
             case r_leggiFile:
                 printf("Inserisci il nome del file da leggere: ");
                 scanf("%s", filename);
 
                 dealloca_rif(elRif0, elRif1, elRif2, elRif3, corse);
-                dim = leggiDati(filename, &corse);
+                dim = leggi_dati(filename, &corse);
                 alloca_rif(&elRif0, &elRif1, &elRif2, &elRif3, corse, dim);
                 break;
             case r_fine: continua = 0; break;
@@ -97,7 +106,7 @@ int main() {
 }
 
 // FUNCTIONS
-int leggiDati(char *filename, corsa_t **_corse){
+int leggi_dati(char *filename, corsa_t **_corse){
     int dim;
     FILE *fin;
     corsa_t *corse;
@@ -105,7 +114,7 @@ int leggiDati(char *filename, corsa_t **_corse){
     fin = fopen(filename, "r");
     if(fin == NULL){
         printf("Errore nella lettura del file!");
-        exit(0);
+        exit(1);
     }
     fscanf(fin, "%d", &dim);
     corse = (corsa_t *) malloc(sizeof(corsa_t) * dim);
@@ -123,6 +132,32 @@ int leggiDati(char *filename, corsa_t **_corse){
     *_corse = corse;
 
     return dim;
+}
+
+comando_e leggi_comando(){
+    comando_e c;
+    char cmd[MAXL];
+    char tabella[r_err][17] = {
+            "stampa",
+            "ord_data",
+            "ord_tratta",
+            "ord_partenza",
+            "ord_dest",
+            "ricerca_stazione",
+            "leggi_file",
+            "fine"
+    };
+
+    printf("Inserisci uno tra questi comandi (stampa, ord_data, ord_tratta, ord_partenza, ord_dest, ricerca_stazione, leggi_file, fine): ");
+    scanf("%s", cmd);
+    strlwr(cmd);
+    printf("\n");
+
+    c = r_stampa;
+    while (c < r_err && strcmp(tabella[c], cmd) != 0){
+        c++;
+    }
+    return c;
 }
 
 void dealloca_rif(corsa_t  **elRif0, corsa_t  **elRif1, corsa_t  **elRif2, corsa_t  **elRif3, corsa_t *corse){
@@ -151,33 +186,7 @@ void alloca_rif(corsa_t  ***_elRif0, corsa_t  ***_elRif1, corsa_t  ***_elRif2, c
     *_elRif3 = elRif3;
 }
 
-comando_e leggiComando(){
-    comando_e c;
-    char cmd[MAXL];
-    char tabella[r_err][17] = {
-            "stampa",
-            "ord_data",
-            "ord_tratta",
-            "ord_partenza",
-            "ord_dest",
-            "ricerca_stazione",
-            "leggi_file",
-            "fine"
-    };
-
-    printf("Inserisci uno tra questi comandi (stampa, ord_data, ord_tratta, ord_partenza, ord_dest, ricerca_stazione, leggi_file, fine): ");
-    scanf("%s", cmd);
-    strlwr(cmd);
-    printf("\n");
-
-    c = r_stampa;
-    while (c < r_err && strcmp(tabella[c], cmd) != 0){
-        c++;
-    }
-    return c;
-}
-
-void stampaLog(corsa_t *corse, int dim){
+void stampa_log(corsa_t *corse, int dim){
     for (int i=0; i<dim; i++){
         printf("Codice Tratta: %s, Partenza: %s, Destinazione: %s, Data: %s, Arrivo: %s, Partenza: %s, Ritardo: %d",
                corse[i].codice_tratta,
@@ -287,19 +296,19 @@ void ricerca_lineare(corsa_t corse[], int dim, char *stazione_ricerca, int len){
     }
 }
 
-void ricerca_dicotomica(corsa_t **corse, int dim, char *prefisso){
-    int sinistra = 0, destra = dim - 1, trovato = 0;
+void ricerca_dicotomica(corsa_t **corse, int dim, char *stazione_ricerca){
+    int l = 0, r = dim - 1, trovato = 0;
 
-    while (sinistra <= destra) {
-        int centro = (sinistra + destra) / 2;
-        if (strncmp(corse[centro]->partenza, prefisso, strlen(prefisso)) == 0) {
+    while (l <= r) {
+        int m = (l + r) / 2;
+        if (strncmp(corse[m]->partenza, stazione_ricerca, strlen(stazione_ricerca)) == 0) {
             trovato = 1;
 
-            int i = centro;
-            while (i > 0 && strncmp(corse[i - 1]->partenza, prefisso, strlen(prefisso)) == 0) {
+            int i = m;
+            while (i > 0 && strncmp(corse[i - 1]->partenza, stazione_ricerca, strlen(stazione_ricerca)) == 0) {
                 i--;
             }
-            while (i < dim && strncmp(corse[i]->partenza, prefisso, strlen(prefisso)) == 0) {
+            while (i < dim && strncmp(corse[i]->partenza, stazione_ricerca, strlen(stazione_ricerca)) == 0) {
                 printf("Codice Tratta: %s, Partenza: %s, Destinazione: %s, Data: %s, Arrivo: %s, Partenza: %s, Ritardo: %d",
                        corse[i]->codice_tratta,
                        corse[i]->partenza,
@@ -312,14 +321,14 @@ void ricerca_dicotomica(corsa_t **corse, int dim, char *prefisso){
                 i++;
             }
             break;
-        } else if (strcmp(corse[centro]->partenza, prefisso) < 0) {
-            sinistra = centro + 1;
+        } else if (strcmp(corse[m]->partenza, stazione_ricerca) < 0) {
+            l = m + 1;
         } else {
-            destra = centro - 1;
+            r = m - 1;
         }
     }
 
     if (!trovato) {
-        printf("Nessuna tratta trovata per la stazione di partenza: %s\n", prefisso);
+        printf("Nessuna tratta trovata per la stazione di partenza: %s\n", stazione_ricerca);
     }
 }

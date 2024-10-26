@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-/* PROTOTIPI */
+// PROTOTIPI
 int gcd(int a, int b);
 
 int main() {
@@ -9,6 +9,7 @@ int main() {
 
     printf("Inserisci due numeri interi, separati da spazio: ");
     scanf("%d %d", &a, &b);
+
     /* SWAP se non viene rispettata la condizione a > b */
     if(a < b){
         temp = a;
@@ -37,6 +38,7 @@ int gcd(int a, int b){
         a = b;
         b = temp;
     }
+
     if((a % 2 == 0) && (b % 2 == 0)){
         return 2 * gcd(a/2, b/2);
     }
@@ -46,5 +48,8 @@ int gcd(int a, int b){
     else if((a % 2 != 0) && (b % 2 != 0)){
         return gcd((a-b)/2, b);
     }
-    return gcd(a-b, b);
+    else if((a % 2 == 0) && (b % 2 != 0)){
+        return gcd(a/2, b);
+    }
+    else return gcd(a-b, b);
 }

@@ -1,31 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* PROTOTIPI */
-int conta_occurrence(int *a, int N, int candidate);
-int trova_candidato(int *a, int start, int end);
-int majority(int *a, int N);
+// PROTOTIPI
+int conta_occorrenze(int *a, int n, int candidato);
+int trova_candidato(int *a, int l, int r);
+int majority(int *a, int n);
+
+void stampa_vet(int *a, int n);
 
 int main() {
     int scelta;
     int *vect;
     int n, result;
 
-    printf("Digita 1 se vuoi inserire i dati manualmente oppure 2 se vuoi usare i dati moccati: ");
+    printf("Digita 1 se vuoi inserire i dati manualmente oppure 2 se vuoi usare i dati di mock: ");
     scanf("%d", &scelta);
-    if(scelta == 2){
-        int vet1[] = {3, 3, 9, 4, 3, 5, 3};
-        n = 7;
-        result = majority(vet1, n);
-        printf("Elemento maggioritario (vet1): %d\n", result);
-
-        int vet2[] = {0, 1, 0, 2, 3, 4, 0, 5};
-        n = 8;
-        result = majority(vet2, n);
-        printf("Elemento maggioritario (vet2): %d\n", result);
-    } else {
+    printf("\n");
+    if(scelta == 1){
         int dim;
-        printf("Inserisci la dimensione di vect: ");
+        printf("Inserisci la dimensione del vettore: ");
         scanf("%d", &dim);
 
         vect = (int *) malloc(sizeof (int) * dim);
@@ -35,15 +28,74 @@ int main() {
         }
 
         result = majority(vect, dim);
-        printf("Elemento maggioritario del vettore: %d", result);
+        if(result == -1){
+            printf("Non esiste l'elemento maggioritario");
+        } else {
+            printf("Elemento maggioritario del vettore e': %d", result);
+        }
+    } else if (scelta == 2) {
+        int vect1[] = {3, 3, 9, 4, 3, 5, 3};
+        n = 7;
+        stampa_vet(vect1, n);
+        result = majority(vect1, n);
+        if(result == -1){
+            printf("Non esiste l'elemento maggioritario nel vettore 1");
+        } else {
+            printf("Elemento maggioritario del vettore 1 e': %d", result);
+        }
+        printf("\n");
+
+        int vect2[] = {0, 1, 0, 2, 3, 4, 0, 5};
+        n = 8;
+        stampa_vet(vect2, n);
+        result = majority(vect2, n);
+        if(result == -1){
+            printf("Non esiste l'elemento maggioritario nel vettore 2");
+        } else {
+            printf("Elemento maggioritario del vettore 2 e': %d", result);
+        }
     }
     return 0;
 }
 
-// Funzione per contare le occorrenze di un elemento in un intervallo dell'array
-int conta_occurrence(int *a, int N, int candidato) {
+// FUNCTIONS
+int majority(int *a, int n) {
+    int candidato = trova_candidato(a, 0, n - 1);
+
+    int occorrenze = conta_occorrenze(a, n, candidato);
+    if (occorrenze > n / 2) {
+        return candidato;
+    } else {
+        return -1;
+    }
+}
+
+// FUNZIONE RICORSIVA
+int trova_candidato(int *a, int l, int r) {
+    // Caso di terminazione: vettore unitario
+    if (l == r) {
+        return a[l];
+    }
+
+    int m = (l + r) / 2;
+    int candidato_sx = trova_candidato(a, l, m);
+    int candidato_dx = trova_candidato(a, m + 1, r);
+
+    if (candidato_sx == candidato_dx) {
+        return candidato_sx;
+    }
+
+    int count_sx = conta_occorrenze(a + l, r - l + 1, candidato_sx);
+    int count_dx = conta_occorrenze(a + l, r - l + 1, candidato_dx);
+
+    // Restituisco il candidato del sottovettore di sinistra se solo maggiore le occorrenze di sinistra, sennò vicerversa
+    return count_sx > count_dx ? candidato_sx : candidato_dx;
+}
+
+
+int conta_occorrenze(int *a, int n, int candidato) {
     int count = 0;
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < n; i++) {
         if (a[i] == candidato) {
             count++;
         }
@@ -51,38 +103,9 @@ int conta_occurrence(int *a, int N, int candidato) {
     return count;
 }
 
-// FUNZIONE RICORSIVA
-int trova_candidato(int *a, int start, int end) {
-    // Caso di terminazione: vettore unitario
-    if (start == end) {
-        return a[start];
+void stampa_vet(int *a, int n){
+    for (int i = 0; i < n; ++i) {
+        printf(" %d ", a[i]);
     }
-
-    int centro = (start + end) / 2;
-    int candidato_sinistro = trova_candidato(a, start, centro);
-    int candidato_destro = trova_candidato(a, centro + 1, end);
-
-    // Se i due candidati sono uguali, lo restituiamo
-    if (candidato_sinistro == candidato_destro) {
-        return candidato_sinistro;
-    }
-
-    // Se sono diversi, contiamo le occorrenze per ciascuno
-    int count_sinistro = conta_occurrence(a + start, end - start + 1, candidato_sinistro);
-    int count_destro = conta_occurrence(a + start, end - start + 1, candidato_destro);
-
-    // Restituiamo il candidato che ha la maggioranza in questo intervallo
-    return count_sinistro > count_destro ? candidato_sinistro : candidato_destro;
-}
-
-int majority(int *a, int N) {
-    // Troviamo il candidato maggioritario usando la ricorsione
-    int candidato = trova_candidato(a, 0, N - 1);
-
-    int occorrenze = conta_occurrence(a, N, candidato);
-    if (occorrenze > N / 2) {
-        return candidato;
-    } else {
-        return -1;
-    }
+    printf("\n");
 }

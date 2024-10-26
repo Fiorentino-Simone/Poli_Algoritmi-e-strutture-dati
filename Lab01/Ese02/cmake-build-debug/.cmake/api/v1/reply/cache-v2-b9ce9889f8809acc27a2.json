@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "e:/UNI/2^ANNO/Algoritmi e strutture dati/Lab/Lab1/Ese02/cmake-build-debug"
+			"value" : "e:/UNI/2^ANNO/Algoritmi e strutture dati/Lab/Lab01/Ese02/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -431,7 +431,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "E:/UNI/2^ANNO/Algoritmi e strutture dati/Lab/Lab1/Ese02/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "E:/UNI/2^ANNO/Algoritmi e strutture dati/Lab/Lab01/Ese02/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -503,7 +503,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "E:/UNI/2^ANNO/Algoritmi e strutture dati/Lab/Lab1/Ese02"
+			"value" : "E:/UNI/2^ANNO/Algoritmi e strutture dati/Lab/Lab01/Ese02"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1135,7 +1135,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "E:/UNI/2^ANNO/Algoritmi e strutture dati/Lab/Lab1/Ese02/cmake-build-debug"
+			"value" : "E:/UNI/2^ANNO/Algoritmi e strutture dati/Lab/Lab01/Ese02/cmake-build-debug"
 		},
 		{
 			"name" : "Ese02_IS_TOP_LEVEL",
@@ -1159,7 +1159,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "E:/UNI/2^ANNO/Algoritmi e strutture dati/Lab/Lab1/Ese02"
+			"value" : "E:/UNI/2^ANNO/Algoritmi e strutture dati/Lab/Lab01/Ese02"
 		},
 		{
 			"name" : "_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED",

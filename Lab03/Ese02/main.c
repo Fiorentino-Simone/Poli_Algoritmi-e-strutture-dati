@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
-#define MAX_LUNGHEZZA_CANZONE 256
+#define MAXL 256
 
 typedef  struct {
     char **scelte;
@@ -12,6 +11,7 @@ typedef  struct {
 /* PROTOTIPI */
 void leggi_file(char *filename, int *n_amici, Livello **val, char ***sol);
 int princ_molt(int pos, Livello *val, char **sol, int n, int cnt);
+
 void free2d(char **sol, int n_amici);
 
 int main() {
@@ -24,8 +24,9 @@ int main() {
 
     leggi_file("brani.txt", &n_amici, &val, &sol);
 
-    /* STAMPA POSSIBILI PLAYLIST CON PRINCIPIO DI MOLTIPLICAZIONE */
+    // stampa di tutte le possibili playlist con il principio di moltiplicazione
     cnt = princ_molt(pos, val, sol, n_amici, cnt);
+    printf("Il numero delle Playlist prodotto e' %d", cnt);
 
     /* DEALLOCAZIONE */
     free2d(sol, n_amici);
@@ -42,7 +43,7 @@ void leggi_file(char *filename, int *n_amici, Livello **_val, char ***_sol) {
     FILE *file = fopen(filename, "r");
     if (!file) {
         printf("Errore apertura file");
-        exit(0);
+        exit(1);
     }
 
     fscanf(file, "%d", n_amici);
@@ -53,17 +54,16 @@ void leggi_file(char *filename, int *n_amici, Livello **_val, char ***_sol) {
         fscanf(file,"%d", &val[i].n_scelte);
         val[i].scelte = (char **) malloc(val[i].n_scelte * sizeof(char *));
         for(int j = 0; j < val[i].n_scelte; j++){
-            val[i].scelte[j]= (char *) malloc(MAX_LUNGHEZZA_CANZONE * sizeof(char));
+            val[i].scelte[j]= (char *) malloc(MAXL * sizeof(char));
             fscanf(file,"%s", val[i].scelte[j]);
         }
     }
 
     sol = (char **) malloc((*n_amici) * sizeof(char *));
     for (int i = 0; i < (*n_amici); ++i) {
-        sol[i] = (char *) malloc(MAX_LUNGHEZZA_CANZONE * sizeof (char));
+        sol[i] = (char *) malloc(MAXL * sizeof (char));
     }
 
-    // Passaggio by pointer
     *_val = val;
     *_sol = sol;
 
