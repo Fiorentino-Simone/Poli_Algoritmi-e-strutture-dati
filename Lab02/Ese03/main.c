@@ -54,7 +54,10 @@ int main() {
         comando = leggiComando();
         switch (comando) {
             case r_stampa: stampaLog(corse, dim); break;
-                ///case r_ordData: ordRifCorsePerData(elRif0, dim); break;
+            case r_ordData: 
+                ordRifCorsePerData(elRif0, dim); 
+                stampa_record(elRif0, dim);
+                break;
             case r_ordCod:
                 ordRifCorsePerTratta(elRif1, dim);
                 stampa_record(elRif1, dim);
@@ -148,7 +151,6 @@ void alloca_rif(corsa_t  ***_elRif0, corsa_t  ***_elRif1, corsa_t  ***_elRif2, c
     *_elRif3 = elRif3;
 }
 
-
 comando_e leggiComando(){
     comando_e c;
     char cmd[MAXL];
@@ -200,6 +202,21 @@ void stampa_record(corsa_t **corse, int dim){
                corse[i]->ora_partenza,
                corse[i]->ritardo);
         printf("\n");
+    }
+}
+
+void ordRifCorsePerData(corsa_t *elRif0[], int dim){
+    corsa_t *temp;
+    int l = 0, r = dim - 1;
+
+    for (int i = l; i < r; i++) {
+        for (int j = l; j < r - i +l; j++) {
+            if(strcmp(elRif0[j]->data, elRif0[j+1]->data) > 0){
+                temp = elRif0[j];
+                elRif0[j] = elRif0[j+1];
+                elRif0[j+1] = temp;
+            }
+        }
     }
 }
 
