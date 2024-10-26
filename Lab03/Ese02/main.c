@@ -2,64 +2,93 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_AMICI 10
-#define MAX_CANZONI 5
 #define MAX_LUNGHEZZA_CANZONE 256
 
-// Struttura per memorizzare le canzoni proposte da ciascun amico
-char canzoni[MAX_AMICI][MAX_CANZONI][MAX_LUNGHEZZA_CANZONE];
-int numero_canzoni[MAX_AMICI];
-int A; // Numero di amici
+typedef  struct {
+    char **scelte;
+    int n_scelte;
+} Livello;
 
-// Funzione per leggere i dati dal file
-void leggi_file(const char *nome_file) {
-    FILE *file = fopen(nome_file, "r");
+/* PROTOTIPI */
+void leggi_file(char *filename, int *n_amici, Livello **val, char ***sol);
+int princ_molt(int pos, Livello *val, char **sol, int n, int cnt);
+void free2d(char **sol, int n_amici);
+
+int main() {
+    /* DICHIARAZIONE */
+    int n_amici, cnt, pos;
+    Livello *val;
+    char **sol;
+
+    cnt = pos = 0;
+
+    leggi_file("brani.txt", &n_amici, &val, &sol);
+
+    /* STAMPA POSSIBILI PLAYLIST CON PRINCIPIO DI MOLTIPLICAZIONE */
+    cnt = princ_molt(pos, val, sol, n_amici, cnt);
+
+    /* DEALLOCAZIONE */
+    free2d(sol, n_amici);
+    free(val->scelte);
+    free(val);
+
+    return 0;
+}
+
+void leggi_file(char *filename, int *n_amici, Livello **_val, char ***_sol) {
+    Livello *val;
+    char **sol;
+
+    FILE *file = fopen(filename, "r");
     if (!file) {
-        perror("Errore apertura file");
-        exit(1);
+        printf("Errore apertura file");
+        exit(0);
     }
 
-    // Leggiamo il numero di amici
-    fscanf(file, "%d", &A);
+    fscanf(file, "%d", n_amici);
 
-    // Per ogni amico, leggiamo il numero di canzoni e i titoli delle canzoni
-    for (int i = 0; i < A; i++) {
-        fscanf(file, "%d", &numero_canzoni[i]);
-        for (int j = 0; j < numero_canzoni[i]; j++) {
-            fscanf(file, "%s", canzoni[i][j]);
+    val = (Livello *) malloc((*n_amici) * sizeof(Livello));
+
+    for (int i = 0; i < (*n_amici); i++) {
+        fscanf(file,"%d", &val[i].n_scelte);
+        val[i].scelte = (char **) malloc(val[i].n_scelte * sizeof(char *));
+        for(int j = 0; j < val[i].n_scelte; j++){
+            val[i].scelte[j]= (char *) malloc(MAX_LUNGHEZZA_CANZONE * sizeof(char));
+            fscanf(file,"%s", val[i].scelte[j]);
         }
     }
+
+    sol = (char **) malloc((*n_amici) * sizeof(char *));
+    for (int i = 0; i < (*n_amici); ++i) {
+        sol[i] = (char *) malloc(MAX_LUNGHEZZA_CANZONE * sizeof (char));
+    }
+
+    // Passaggio by pointer
+    *_val = val;
+    *_sol = sol;
 
     fclose(file);
 }
 
-// Funzione ricorsiva per generare le playlist
-void genera_playlist(int amico, char playlist_corrente[MAX_AMICI][MAX_LUNGHEZZA_CANZONE]) {
-    // Caso base: se abbiamo scelto una canzone per ogni amico, stampiamo la playlist
-    if (amico == A) {
-        printf("Playlist: ");
-        for (int i = 0; i < A; i++) {
-            printf("%s ", playlist_corrente[i]);
+int princ_molt(int pos, Livello *val, char **sol, int n, int cnt){
+    if(pos >= n){
+        printf("Playlist %d ", cnt);
+        for (int i = 0; i < n; i++) {
+            printf(" %s ", sol[i]);
         }
         printf("\n");
-        return;
+        return cnt+1;
     }
-
-    // Passo ricorsivo: scegliamo una canzone per l'amico corrente
-    for (int i = 0; i < numero_canzoni[amico]; i++) {
-        strcpy(playlist_corrente[amico], canzoni[amico][i]);
-        genera_playlist(amico + 1, playlist_corrente);
+    for (int i = 0; i < val[pos].n_scelte; i++) {
+        sol[pos] = val[pos].scelte[i];
+        cnt = princ_molt(pos+1, val, sol, n, cnt);
     }
+    return cnt;
 }
 
-int main() {
-    leggi_file("brani.txt");
-
-    // Array temporaneo per costruire la playlist corrente
-    char playlist_corrente[MAX_AMICI][MAX_LUNGHEZZA_CANZONE];
-
-    // Generiamo tutte le playlist possibili
-    genera_playlist(0, playlist_corrente);
-
-    return 0;
+void free2d(char **sol, int n_amici) {
+    for (int i = 0; i < n_amici; ++i) {
+        free(sol[i]);
+    }
+    free(sol);
 }
