@@ -45,7 +45,9 @@ int compareDate(Date d1, Date d2);
 
 void inserisci_da_tastiera(link *head);
 link ricerca_codice(link lista, char codice[]);
-node_t elimina_codice(link *head, char codice[]);
+link elimina_codice(link head, link temp);
+link ricerca_data(link lista, Date data);
+link elimina_from_date(link head, link temp, link end);
 
 link inserimento_in_testa_anagrafica(link head, Anagrafica anagrafica);
 link aggiunta_nodo(link head, Anagrafica anagrafica);
@@ -54,10 +56,12 @@ int main() {
     // DICHIARAZIONI
     int continua = 1;
     comando_e comando;
-    char filename[MAXL], codice[COD];
+    char filename[MAXL], codice[COD], data1_in[MAXL], data2_in[MAXL];
+    Date data1, data2;
 
-    link head = NULL, temp = NULL;
-    node_t temp_canc;
+    link head, temp, end;
+
+    head = temp = end = NULL;
 
     while(continua){
         comando = leggi_comando();
@@ -83,13 +87,26 @@ int main() {
             case r_cancellazioneCod:
                 printf("Inserisci il codice da ricercare: ");
                 scanf("%s", codice);
-                temp_canc = elimina_codice(&head, codice);
-                if(temp_canc.next != NULL) {
-                    stampa_record(temp_canc.val);
+                temp = ricerca_codice(head, codice);
+                if(temp != NULL) {
+                    stampa_record(temp->val);
+                    head = elimina_codice(head, temp);
                 } else {
                     printf("Il codice %s non e' presente nella lista!", codice);
                 }
                 break;
+            case r_cancellazioneRange:
+                printf("Inserisci il range di date (gg/mm/aaaa gg/mm/aaaa): ");
+                scanf("%s %s", data1_in, data2_in);
+                manageDate(data1_in, &data1);
+                manageDate(data2_in, &data2);
+                temp = ricerca_data(head, data1);
+                end = ricerca_data(head, data2);
+                if(temp != NULL && end != NULL) {
+                    head = elimina_from_date(head, temp, end);
+                } else {
+                    printf("Il range di date inserito non è corretto!");
+                }
             case r_stampaFile:
                 stampa_lista(head);
                 break;
@@ -195,32 +212,42 @@ link ricerca_codice(link lista, char codice[]){
     return NULL;
 }
 
-node_t elimina_codice(link *head, char codice[]){
-    link lista, p;
-    node_t temp;
+link elimina_codice(link head, link temp){
+    link x, p;
+    int ok = 0;
 
-    lista = *head;
+    x = head;
     p = NULL;
 
-    while(lista != NULL){
-        if(strcmp(lista->val.codice, codice) == 0){
+    while(x != NULL && ok != 1){
+        if(x == temp){
             if(p == NULL){
-                *head = lista -> next;
+                head = x->next;
             } else {
-                p->next = lista -> next;
+                p->next = x -> next;
             }
-            temp.val = lista->val;
-            temp.next = lista->next; //TODO: gestire il caso che se voglio eliminare l'item che si trova in coda mettera a temp.next = NULL quindi il controllo salta
-            free(lista);
-
-            return temp;
+            free(temp);
+            ok = 1;
         }
-        p = lista;
-        lista = lista->next;
+        p = x;
+        x = x->next;
     }
 
-    temp.next = NULL;
-    return temp;
+    return head;
+}
+
+link ricerca_data(link lista, Date data){
+    while(lista != NULL){
+        if(compareDate(lista->val.data_di_nascita, data) == 0){
+            return lista;
+        }
+        lista = lista->next;
+    }
+    return NULL;
+}
+
+link elimina_from_date(link head, link temp, link end){
+    // TODO: gestire l'elimina dal range delle date
 }
 
 link inserimento_in_testa_anagrafica(link head, Anagrafica anagrafica){
@@ -263,16 +290,21 @@ int compareDate(Date d1, Date d2) {
 
 void stampa_lista(link lista){
     printf("\n");
-    while(lista != NULL){
-        printf("%s %s %s %s %s %s %d\n",
-               lista->val.codice,
-               lista->val.nome,
-               lista->val.cognome,
-               lista->val.data_di_nascita_out,
-               lista->val.via,
-               lista->val.citta,
-               lista->val.cap);
-        lista = lista->next;
+
+    if(lista == NULL){
+        printf("La lista risulta vuota!");
+    } else {
+        while(lista != NULL){
+            printf("%s %s %s %s %s %s %d\n",
+                   lista->val.codice,
+                   lista->val.nome,
+                   lista->val.cognome,
+                   lista->val.data_di_nascita_out,
+                   lista->val.via,
+                   lista->val.citta,
+                   lista->val.cap);
+            lista = lista->next;
+        }
     }
 }
 
