@@ -107,6 +107,7 @@ int main() {
                 } else {
                     printf("Il range di date inserito non è corretto!");
                 }
+                break;
             case r_stampaFile:
                 stampa_lista(head);
                 break;
@@ -247,7 +248,27 @@ link ricerca_data(link lista, Date data){
 }
 
 link elimina_from_date(link head, link temp, link end){
-    // TODO: gestire l'elimina dal range delle date
+    link x, p;
+    int ok = 0;
+
+    x = head;
+    p = NULL;
+
+    while(x != NULL && ok != 1){
+        if(x == temp){
+            if(p == NULL){
+                head = end->next;
+            } else {
+                p->next = end->next;
+            }
+            free(temp);
+            ok = 1;
+        }
+        p = x;
+        x = x->next;
+    }
+
+    return head;
 }
 
 link inserimento_in_testa_anagrafica(link head, Anagrafica anagrafica){
