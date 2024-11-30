@@ -10,7 +10,8 @@
 #define MAXNEQUIP 8
 
 // TYPEDEF
-typedef struct{
+typedef struct
+{
     int hp;
     int mp;
     int atk;
@@ -19,26 +20,31 @@ typedef struct{
     int spr;
 } stat_t;
 
-typedef struct{
+typedef struct
+{
     int inUso;
     inv_t vettEq[MAXNEQUIP];
 } tabEquip_t;
 
-typedef struct{
+typedef struct
+{
     char codice[MAXN];
     char nome[MAXN];
     char classe[MAXN];
     tabEquip_t equip;
+    stat_t stat_base;
     stat_t stat;
 } Pg_t;
 
 typedef struct nodoPg *nodePg_t;
-typedef struct{
+typedef struct
+{
     Pg_t val;
     nodePg_t next;
 } nodoPg;
 
-typedef struct {
+typedef struct
+{
     nodoPg *headPg, *tailPg;
     int nPg;
 } tabPg_t;
@@ -49,11 +55,17 @@ tabPg_t *initPersonaggi();
 
 void inserimento_in_coda_personaggio(tabPg_t *tabPg, Pg_t personaggi);
 void stampaPersonaggi(tabPg_t *tabPg);
-void stampaEquipaggiamento(nodoPg *nodo,int i);
+void stampaPersonaggio(Pg_t personaggio);
+void stampaEquipaggiamento(nodoPg *nodo, int i);
 
-tabPg_t* aggiungiPersonaggio(tabPg_t *tabPg);
+tabPg_t *aggiungiPersonaggio(tabPg_t *tabPg);
 void rimuoviPersonaggio(tabPg_t *tabPg);
 nodoPg *ricerca_codice(nodoPg *lista, char *cod);
-nodoPg *elimina_codice(nodoPg *lista,  nodoPg **coda, nodoPg *temp);
+nodoPg *elimina_codice(nodoPg *lista, nodoPg **coda, nodoPg *temp);
 
-#endif //ESE03_PERSONAGGI_H
+void aggiungiOggetto(tabPg_t *tabPg, tabInv_t *tabI);
+void rimuoviOggetto(tabPg_t *tabPg, tabInv_t *tabI);
+
+void calcolaStatistiche(tabPg_t *tabPg, tabInv_t *tabI);
+
+#endif // ESE03_PERSONAGGI_H
