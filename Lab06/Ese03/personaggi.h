@@ -54,6 +54,6 @@ void stampaEquipaggiamento(nodoPg *nodo,int i);
 tabPg_t* aggiungiPersonaggio(tabPg_t *tabPg);
 void rimuoviPersonaggio(tabPg_t *tabPg);
 nodoPg *ricerca_codice(nodoPg *lista, char *cod);
-nodoPg *elimina_codice(nodoPg *lista, nodoPg *temp);
+nodoPg *elimina_codice(nodoPg *lista,  nodoPg **coda, nodoPg *temp);
 
 #endif //ESE03_PERSONAGGI_H

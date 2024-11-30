@@ -94,7 +94,7 @@ void rimuoviPersonaggio(tabPg_t *tabPg){
 
     temp = ricerca_codice(tabPg->headPg, cod);
     if(temp != NULL) {
-        tabPg->headPg = elimina_codice(tabPg->headPg, temp);
+        tabPg->headPg = elimina_codice(tabPg->headPg, &(tabPg->tailPg), temp);
         tabPg->nPg--;
     } else {
         printf("Il codice %s non e' presente nella lista!", cod);
@@ -111,56 +111,41 @@ nodoPg *ricerca_codice(nodoPg *lista, char *cod){
     return NULL;
 }
 
-nodoPg *elimina_codice(nodoPg *lista, nodoPg *temp){
+nodoPg *elimina_codice(nodoPg *lista, nodoPg **coda, nodoPg *temp) {
     nodoPg *x, *p;
     int ok = 0;
 
-    // x = lista;
-    // p = NULL;
-
-    // while(x != NULL && ok != 1){
-    //     if(x == temp){
-    //         if(p == NULL){
-    //             lista = x->next;
-    //         } else {
-    //             p->next = x -> next;
-    //         }
-    //         free(temp);
-    //         ok = 1;
-    //     }
-    //     p = x;
-    //     x = x->next;
-    // }
-
-
-    // I have a problem: when i delete the last element and i want to after add a new element in the tail that one is not added
-    // I think that the problem is in the tailPg, because i don't update it
-    // You must show me another code to delete element but also update the tailPg
-
-    if(temp == lista){
+    if (temp == lista) {
         lista = lista->next;
+        if (temp == *coda) {
+            *coda = NULL;
+        }
         free(temp);
     } else {
         x = lista;
-        while(x != NULL && x != temp){
-            p = x;
-            x = x->next;
-        }
-        if(x != NULL){
-            p->next = x->next;
-            free(x);
+        p = NULL;
+        while (x != NULL && ok != 1) {
+            if (x == temp) {
+                if (x == *coda) { // nel caso mi trovassi in coda aggiorno il puntatore
+                    *coda = p;
+                    if (p != NULL) {
+                        p->next = NULL;
+                    }
+                } else {
+                    p->next = x->next;
+                }
+                free(temp);
+                ok = 1;
+            } else {
+                p = x;
+                x = x->next;
+            }
         }
     }
 
-    // TODO: error in the tailPg
-
-    
-
-
-
-
     return lista;
 }
+
 
 void stampaPersonaggi(tabPg_t *tabPg){
     int i;
