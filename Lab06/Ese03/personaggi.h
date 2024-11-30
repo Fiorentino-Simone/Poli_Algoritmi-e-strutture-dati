@@ -50,8 +50,8 @@ typedef struct
 } tabPg_t;
 
 // PROTOTIPI
-tabPg_t *leggiPersonaggi(tabPg_t *tabPg);
 tabPg_t *initPersonaggi();
+tabPg_t *leggiPersonaggi(tabPg_t *tabPg);
 
 void inserimento_in_coda_personaggio(tabPg_t *tabPg, Pg_t personaggi);
 void stampaPersonaggi(tabPg_t *tabPg);
