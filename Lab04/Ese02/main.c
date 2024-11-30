@@ -85,7 +85,7 @@ int main() {
                 }
                 break;
             case r_cancellazioneCod:
-                printf("Inserisci il codice da ricercare: ");
+                printf("Inserisci il codice da eliminare: ");
                 scanf("%s", codice);
                 temp = ricerca_codice(head, codice);
                 if(temp != NULL) {

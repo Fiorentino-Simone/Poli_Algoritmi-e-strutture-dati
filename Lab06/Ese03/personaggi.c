@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-tabPg_t *inizializzazionePersonaggi(){
+tabPg_t *initPersonaggi(){
     tabPg_t *nodo = malloc(sizeof(* nodo));
     nodo->headPg = NULL;
     nodo->tailPg = NULL;
@@ -11,7 +11,7 @@ tabPg_t *inizializzazionePersonaggi(){
 }
 
 tabPg_t* leggiPersonaggi(tabPg_t *tabPg){
-    Pg_t personaggi;
+    Pg_t personaggio;
     FILE *fin;
     /*char filename[MAXN];
 
@@ -25,26 +25,26 @@ tabPg_t* leggiPersonaggi(tabPg_t *tabPg){
     }
 
     while(!feof(fin)) {
-        personaggi.equip.inUso=0;
+        personaggio.equip.inUso=0;
         fscanf(fin,"%s%s%s%d%d%d%d%d%d",
-               personaggi.codice,
-               personaggi.nome,
-               personaggi.classe,
-               &(personaggi.stat.hp),
-               &(personaggi.stat.mp),
-               &(personaggi.stat.atk),
-               &(personaggi.stat.def),
-               &(personaggi.stat.mag),
-               &(personaggi.stat.spr));
+               personaggio.codice,
+               personaggio.nome,
+               personaggio.classe,
+               &(personaggio.stat.hp),
+               &(personaggio.stat.mp),
+               &(personaggio.stat.atk),
+               &(personaggio.stat.def),
+               &(personaggio.stat.mag),
+               &(personaggio.stat.spr));
 
-        inserimento_in_testa_personaggio(tabPg, personaggi);
+        inserimento_in_coda_personaggio(tabPg, personaggio);
     }
 
     fclose(fin);
     return tabPg;
 }
 
-void inserimento_in_testa_personaggio(tabPg_t *tabPg, Pg_t personaggi){
+void inserimento_in_coda_personaggio(tabPg_t *tabPg, Pg_t personaggio){
     nodoPg *new_node;
 
     new_node = malloc(sizeof(*new_node));
@@ -53,24 +53,122 @@ void inserimento_in_testa_personaggio(tabPg_t *tabPg, Pg_t personaggi){
         return;
     }
 
-    new_node->val = personaggi;
+    new_node->val = personaggio;
     new_node->next = NULL;
     if(tabPg->headPg==NULL){
         tabPg->headPg = tabPg->tailPg = new_node;
     }else{
-        tabPg->tailPg->next = new_node;
+        tabPg->tailPg->next = new_node; //TODO: controllo di questa linea
         tabPg->tailPg = new_node;
     }
     tabPg->nPg++;
 }
 
-void stampaPersonaggi(tabPg_t *tabp){
-    nodoPg *nodo;
-    nodo=tabp->headPg;
-    printf("\n");
+tabPg_t* aggiungiPersonaggio(tabPg_t *tabPg){
+    Pg_t personaggio;
+
+    printf("Per inserire il nuovo personaggio devi scrivere le sue informazioni, separate da spazio: ");
+    printf("\n Le informazioni sono relative a 'codice nome classe hp mp atk def mag spr': ");
+    scanf("%s %s %s %d %d %d %d %d %d",
+          personaggio.codice,
+          personaggio.nome,
+          personaggio.classe,
+          &(personaggio.stat.hp),
+          &(personaggio.stat.mp),
+          &(personaggio.stat.atk),
+          &(personaggio.stat.def),
+          &(personaggio.stat.mag),
+          &(personaggio.stat.spr));
+    personaggio.equip.inUso = 0;
+    inserimento_in_coda_personaggio(tabPg, personaggio);
+
+    return tabPg;
+}
+
+void rimuoviPersonaggio(tabPg_t *tabPg){
+    char cod[MAXN];
+    nodoPg *temp;
+
+    printf("Inserisci il codice del personaggio da eliminare: ");
+    scanf("%s", cod);
+
+    temp = ricerca_codice(tabPg->headPg, cod);
+    if(temp != NULL) {
+        tabPg->headPg = elimina_codice(tabPg->headPg, temp);
+        tabPg->nPg--;
+    } else {
+        printf("Il codice %s non e' presente nella lista!", cod);
+    }
+}
+
+nodoPg *ricerca_codice(nodoPg *lista, char *cod){
+    while(lista != NULL){
+        if(strcmp(lista->val.codice, cod) == 0){
+            return lista;
+        }
+        lista = lista->next;
+    }
+    return NULL;
+}
+
+nodoPg *elimina_codice(nodoPg *lista, nodoPg *temp){
+    nodoPg *x, *p;
+    int ok = 0;
+
+    // x = lista;
+    // p = NULL;
+
+    // while(x != NULL && ok != 1){
+    //     if(x == temp){
+    //         if(p == NULL){
+    //             lista = x->next;
+    //         } else {
+    //             p->next = x -> next;
+    //         }
+    //         free(temp);
+    //         ok = 1;
+    //     }
+    //     p = x;
+    //     x = x->next;
+    // }
+
+
+    // I have a problem: when i delete the last element and i want to after add a new element in the tail that one is not added
+    // I think that the problem is in the tailPg, because i don't update it
+    // You must show me another code to delete element but also update the tailPg
+
+    if(temp == lista){
+        lista = lista->next;
+        free(temp);
+    } else {
+        x = lista;
+        while(x != NULL && x != temp){
+            p = x;
+            x = x->next;
+        }
+        if(x != NULL){
+            p->next = x->next;
+            free(x);
+        }
+    }
+
+    // TODO: error in the tailPg
+
+    
+
+
+
+
+    return lista;
+}
+
+void stampaPersonaggi(tabPg_t *tabPg){
     int i;
-    printf("PROVCA");
-    while(nodo!=NULL){
+    nodoPg *nodo;
+
+    nodo = tabPg->headPg;
+    printf("\n");
+    while(nodo != NULL){
         printf("%s %s %s %d %d %d %d %d %d\n",
                nodo->val.codice,
                nodo->val.nome,
@@ -81,27 +179,28 @@ void stampaPersonaggi(tabPg_t *tabp){
                (nodo->val.stat.def),
                (nodo->val.stat.mag),
                (nodo->val.stat.spr));
-        if(nodo->val.equip.inUso!=0){
+        if(nodo->val.equip.inUso != 0){
             printf("Equipaggiamento personaggio\n");
-            for(i=0;i<nodo->val.equip.inUso;i++){
-                stampaequippagiamentopersonaggio(nodo,i);
+            for(i=0; i < nodo->val.equip.inUso; i++){
+                stampaEquipaggiamento(nodo, i);
             }
         }
-        nodo=nodo->next;
+        nodo = nodo->next;
         printf("\n");
     }
-    printf("Numero Personaggi Attuali : %d\n",tabp->nPg);
+    printf("Numero Personaggi Attuali : %d\n", tabPg->nPg);
 }
 
-void stampaequippagiamentopersonaggio(nodoPg *nodo,int i){
+void stampaEquipaggiamento(nodoPg *nodo, int index){
+    //TODO: fare una print più esplicita (dicendo il nome della chiavi)
     printf("%s %s %d %d %d %d %d %d\n",
-           nodo->val.equip.vettEq[i].nome,
-           nodo->val.equip.vettEq[i].tipo,
-           nodo->val.equip.vettEq[i].stat.hp,
-           nodo->val.equip.vettEq[i].stat.mp,
-           nodo->val.equip.vettEq[i].stat.atk,
-           nodo->val.equip.vettEq[i].stat.def,
-           nodo->val.equip.vettEq[i].stat.mag,
-           nodo->val.equip.vettEq[i].stat.spr
+           nodo->val.equip.vettEq[index].nome,
+           nodo->val.equip.vettEq[index].tipo,
+           nodo->val.equip.vettEq[index].stat.hp,
+           nodo->val.equip.vettEq[index].stat.mp,
+           nodo->val.equip.vettEq[index].stat.atk,
+           nodo->val.equip.vettEq[index].stat.def,
+           nodo->val.equip.vettEq[index].stat.mag,
+           nodo->val.equip.vettEq[index].stat.spr
     );
 }

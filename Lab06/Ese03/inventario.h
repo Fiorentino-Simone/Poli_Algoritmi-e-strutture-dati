@@ -28,4 +28,9 @@ typedef struct{
     int nInv, maxInv;
 } tabInv_t;
 
+// PROTOTIPI
+tabInv_t* leggiInventario();
+
+void stampaInventario(tabInv_t *tabI);
+
 #endif //ESE03_INVENTARIO_H

@@ -44,10 +44,16 @@ typedef struct {
 } tabPg_t;
 
 // PROTOTIPI
-tabPg_t* leggiPersonaggi(tabPg_t *tabPg);
-tabPg_t *inizializzazionePersonaggi();
-void inserimento_in_testa_personaggio(tabPg_t *tabPg, Pg_t personaggi);
-void stampaPersonaggi(tabPg_t *tabp);
-void stampaequippagiamentopersonaggio(nodoPg *nodo,int i);
+tabPg_t *leggiPersonaggi(tabPg_t *tabPg);
+tabPg_t *initPersonaggi();
+
+void inserimento_in_coda_personaggio(tabPg_t *tabPg, Pg_t personaggi);
+void stampaPersonaggi(tabPg_t *tabPg);
+void stampaEquipaggiamento(nodoPg *nodo,int i);
+
+tabPg_t* aggiungiPersonaggio(tabPg_t *tabPg);
+void rimuoviPersonaggio(tabPg_t *tabPg);
+nodoPg *ricerca_codice(nodoPg *lista, char *cod);
+nodoPg *elimina_codice(nodoPg *lista, nodoPg *temp);
 
 #endif //ESE03_PERSONAGGI_H

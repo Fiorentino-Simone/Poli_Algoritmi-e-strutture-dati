@@ -7,7 +7,7 @@
 
 // TYPEDEF
 typedef enum {
-    r_caricaPersonaggi, r_fine, r_err
+    r_caricaPersonaggi, r_caricaOggetti, r_aggiungiPersonaggio, r_rimuoviPersonaggio, r_fine, r_err
 } comando_e;
 
 // PROTOTIPI
@@ -17,8 +17,10 @@ int main() {
     // DICHIARAZIONI
     int continua, comando;
     tabPg_t *tabPg;
+    tabInv_t *tabI;
 
-    tabPg = inizializzazionePersonaggi();
+    tabI = NULL;
+    tabPg = initPersonaggi();
     continua = 1;
 
     do {
@@ -26,6 +28,18 @@ int main() {
         switch (comando) {
             case r_caricaPersonaggi:
                 tabPg = leggiPersonaggi(tabPg);
+                stampaPersonaggi(tabPg);
+                break;
+            case r_caricaOggetti:
+                tabI = leggiInventario();
+                stampaInventario(tabI);
+                break;
+            case r_aggiungiPersonaggio:
+                tabPg = aggiungiPersonaggio(tabPg);
+                stampaPersonaggi(tabPg);
+                break;
+            case r_rimuoviPersonaggio:
+                rimuoviPersonaggio(tabPg);
                 stampaPersonaggi(tabPg);
                 break;
             case r_fine:
@@ -44,12 +58,15 @@ int main() {
 comando_e leggi_comando(){
     comando_e c;
     char cmd[MAXL];
-    char tabella[r_err][20] = {
+    char tabella[r_err][25] = {
             "carica_personaggi",
+            "carica_inventario",
+            "aggiungi_personaggio",
+            "rimuovi_personaggio",
             "fine"
     };
 
-    printf("Inserisci uno tra questi comandi (carica_personaggi, fine): ");
+    printf("Inserisci uno tra questi comandi (carica_personaggi, carica_inventario, aggiungi_personaggio, rimuovi_personaggio, fine): ");
     scanf("%s", cmd);
     strlwr(cmd);
     printf("\n");
