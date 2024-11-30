@@ -25,7 +25,7 @@ tabInv_t *leggiInventario()
     tabI->vettInv = (inv_t *)malloc((tabI->nInv) * sizeof(inv_t));
     tabI->maxInv = tabI->nInv;
 
-    for (int i = 0; i < tabI->nInv; ++i)
+    for (int i = 0; i < tabI->nInv; i++)
     {
         fscanf(fin, "%s %s %d %d %d %d %d %d",
                 tabI->vettInv[i].nome,
@@ -44,7 +44,7 @@ tabInv_t *leggiInventario()
 
 void stampaInventario(tabInv_t *tabI)
 {
-    for (int i = 0; i < tabI->nInv; ++i)
+    for (int i = 0; i < tabI->nInv; i++)
     {
         stampaOggetto(tabI->vettInv[i]);
     }
@@ -68,7 +68,7 @@ void stampaOggetto(inv_t oggetto)
 
 int ricerca_oggetto(tabInv_t *tabI, char *nome)
 {
-    for (int i = 0; i < tabI->nInv; ++i)
+    for (int i = 0; i < tabI->nInv; i++)
     {
         if (strcmp(tabI->vettInv[i].nome, nome) == 0)
         {
@@ -76,4 +76,9 @@ int ricerca_oggetto(tabInv_t *tabI, char *nome)
         }
     }
     return -1;
+}
+
+void freeInventario(tabInv_t *tabI){
+    free(tabI->vettInv);
+    free(tabI);
 }

@@ -41,7 +41,7 @@ tabPg_t *leggiPersonaggi(tabPg_t *tabPg)
                 &(personaggio.stat.mag),
                 &(personaggio.stat.spr));
         personaggio.stat_base = personaggio.stat;
-        
+
         inserimento_in_coda_personaggio(tabPg, personaggio);
     }
 
@@ -227,7 +227,7 @@ void rimuoviOggetto(tabPg_t *tabPg, tabInv_t *tabI)
     if (temp != NULL && index_obj != -1)
     {
         temp->val.equip.inUso--;
-        for (int i = index_obj; i < temp->val.equip.inUso; ++i)
+        for (int i = index_obj; i < temp->val.equip.inUso; i++)
         {
             temp->val.equip.vettEq[i] = temp->val.equip.vettEq[i + 1];
         }
@@ -319,7 +319,6 @@ void stampaPersonaggi(tabPg_t *tabPg)
             }
         }
         nodo = nodo->next;
-        printf("\n");
     }
     printf("Numero Personaggi: %d\n", tabPg->nPg);
 }
@@ -349,4 +348,15 @@ void stampaEquipaggiamento(nodoPg *nodo, int index)
             nodo->val.equip.vettEq[index].stat.def,
             nodo->val.equip.vettEq[index].stat.mag,
             nodo->val.equip.vettEq[index].stat.spr);
+}
+
+void freePersonaggi(tabPg_t *tabPg){
+    nodoPg *temp;
+
+    while(tabPg->headPg != NULL){
+        temp = tabPg->headPg;
+        tabPg->headPg = tabPg->headPg->next;
+        free(temp);
+    }
+    free(tabPg);
 }

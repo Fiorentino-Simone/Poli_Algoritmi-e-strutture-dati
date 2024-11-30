@@ -39,4 +39,6 @@ void stampaOggetto(inv_t oggetto);
 
 int ricerca_oggetto(tabInv_t *tabI, char *nome);
 
+void freeInventario(tabInv_t *tabI);
+
 #endif // ESE03_INVENTARIO_H

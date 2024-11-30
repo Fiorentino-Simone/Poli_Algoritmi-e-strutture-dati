@@ -8,6 +8,7 @@
 // DEFINE
 #define MAXN 50
 #define MAXNEQUIP 8
+#define MAXCODE 7
 
 // TYPEDEF
 typedef struct
@@ -28,12 +29,12 @@ typedef struct
 
 typedef struct
 {
-    char codice[MAXN];
+    char codice[MAXCODE];
     char nome[MAXN];
     char classe[MAXN];
     tabEquip_t equip;
-    stat_t stat_base;
-    stat_t stat;
+    stat_t stat_base; // Valori delle statistiche inserite all'inizio
+    stat_t stat;     // Valori delle statistiche quando calcolate
 } Pg_t;
 
 typedef struct nodoPg *nodePg_t;
@@ -67,5 +68,7 @@ void aggiungiOggetto(tabPg_t *tabPg, tabInv_t *tabI);
 void rimuoviOggetto(tabPg_t *tabPg, tabInv_t *tabI);
 
 void calcolaStatistiche(tabPg_t *tabPg, tabInv_t *tabI);
+
+void freePersonaggi(tabPg_t *tabPg);
 
 #endif // ESE03_PERSONAGGI_H

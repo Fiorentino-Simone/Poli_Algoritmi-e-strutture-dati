@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "personaggi.h"
+#include "inventario.h"
 
 // DEFINE
 #define MAXL 30
@@ -76,6 +77,10 @@ int main()
         }
     } while (continua);
     printf("Programma terminato....\n");
+
+    // DEALLOCAZIONE
+    freePersonaggi(tabPg);
+    freeInventario(tabI);
     return 0;
 }
 
