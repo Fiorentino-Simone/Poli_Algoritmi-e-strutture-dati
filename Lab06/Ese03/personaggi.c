@@ -226,10 +226,16 @@ void rimuoviOggetto(tabPg_t *tabPg, tabInv_t *tabI)
     index_obj = ricerca_oggetto(tabI, nome);
     if (temp != NULL && index_obj != -1)
     {
-        temp->val.equip.inUso--;
-        for (int i = index_obj; i < temp->val.equip.inUso; i++)
+        for (int i = 0; i < temp->val.equip.inUso; i++)
         {
-            temp->val.equip.vettEq[i] = temp->val.equip.vettEq[i + 1];
+            if (strcmp(temp->val.equip.vettEq[i].nome, nome) == 0)
+            {
+                temp->val.equip.inUso--;
+                for (int j = i; j < temp->val.equip.inUso; j++)
+                {
+                    temp->val.equip.vettEq[j] = temp->val.equip.vettEq[j + 1];
+                }
+            }
         }
     }
     else

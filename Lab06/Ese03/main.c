@@ -51,22 +51,48 @@ int main()
             tabPg = aggiungiPersonaggio(tabPg);
             break;
         case r_rimuoviPersonaggio:
-            rimuoviPersonaggio(tabPg);
+            if(tabPg != NULL && tabPg->headPg != NULL){
+                rimuoviPersonaggio(tabPg);
+            }
+            else {
+                printf("Devi prima inserire dei personaggi per cancellarli!\n");
+            }
             break;
         case r_aggiungiOggetto:
-            aggiungiOggetto(tabPg, tabI);
+            if ((tabPg != NULL && tabPg->headPg != NULL) && tabI != NULL) {
+                aggiungiOggetto(tabPg, tabI);
+            } else {
+                printf("Controlla di aver inserito prima sia i personaggi che l'inventario!\n");
+            }
             break;
         case r_rimuoviOggetto:
-            rimuoviOggetto(tabPg, tabI);
+            if ((tabPg != NULL && tabPg->headPg != NULL) && tabI != NULL){
+                rimuoviOggetto(tabPg, tabI);
+            }
+            else {
+                printf("Controlla di aver inserito prima sia i personaggi che l'inventario!\n");
+            }
             break;
         case r_stampaPersonaggi:
-            stampaPersonaggi(tabPg);
+            if(tabPg != NULL && tabPg->headPg != NULL){
+                stampaPersonaggi(tabPg);
+            } else {
+                printf("Non sono presenti personaggi!\n");
+            }
             break;
         case r_stampaInventario:
-            stampaInventario(tabI);
+            if(tabI != NULL){
+                stampaInventario(tabI);
+            } else {
+                printf("L'inventario e' vuoto!\n");
+            }
             break;
         case r_calcolaStatistiche:
-            calcolaStatistiche(tabPg, tabI);
+            if((tabPg != NULL && tabPg->headPg != NULL) && tabI != NULL){
+                calcolaStatistiche(tabPg, tabI);
+            } else {
+                printf("Controlla di aver inserito prima sia i personaggi che l'inventario!\n");
+            }
             break;
         case r_fine:
             continua = 0;
@@ -80,7 +106,9 @@ int main()
 
     // DEALLOCAZIONE
     freePersonaggi(tabPg);
-    freeInventario(tabI);
+    if(tabI != NULL){
+        freeInventario(tabI);
+    }
     return 0;
 }
 
