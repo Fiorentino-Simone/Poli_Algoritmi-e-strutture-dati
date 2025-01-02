@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.sql": "sql",
+        "titoli.h": "c",
+        "stdlib.h": "c",
+        "quotazioni.h": "c"
+    }
+}
