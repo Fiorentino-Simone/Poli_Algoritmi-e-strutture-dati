@@ -2,7 +2,8 @@
 #define ESE01_DATETIME_H
 
 typedef int Key;
-typedef struct {
+typedef struct
+{
     int YYYY, MM, DD;
     int hh, mm;
 } Datetime;
@@ -11,4 +12,4 @@ typedef struct {
 int KEYcmp(Key k1, Key k2);
 Key KEYget(Datetime val);
 
-#endif //ESE01_DATETIME_H
+#endif // ESE01_DATETIME_H

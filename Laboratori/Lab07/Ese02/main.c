@@ -33,8 +33,8 @@ void file_read(char *filename, Element *elements, int *elemCount);
 int checkSol(int **sol, Element *elementi);
 void calcolateValue(int **sol, Element *elementi, Diagonal *diagonali);
 
-void bestSolR(int pos, int diag, int **sol, int **bestSolM, float *tot, Element *elementi, int n, int ddVal, int dpVal, int dd, int dp, Diagonal *diagonals);
 void bestSol(Element *elementi, int n, int dd, int dp);
+void bestSolR(int pos, int diag, int **sol, int **bestSolM, float *tot, Element *elementi, int n, int ddVal, int dpVal, int dd, int dp, Diagonal *diagonals);
 
 void printSolution(Diagonal *diagonals, int **bestSolM, Element *elementi, int dd, int dp, float tot);
 
@@ -108,10 +108,7 @@ void bestSol(Element *elementi, int n, int dd, int dp)
         {
             sol[i][j] = -1;
         }
-    }
 
-    for (int i = 0; i < MAX_DIAGS; i++)
-    {
         diagonals[i].score = 0;
         diagonals[i].hasBonus = 0;
     }
@@ -119,6 +116,15 @@ void bestSol(Element *elementi, int n, int dd, int dp)
     bestSolR(0, 0, sol, bestSolM, &tot, elementi, n, 0, 0, dd, dp, diagonals);
 
     printSolution(diagonals, bestSolM, elementi, dd, dp, tot);
+
+    for (int i = 0; i < MAX_DIAGS; i++)
+    {
+        free(sol[i]);
+        free(bestSolM[i]);
+    }
+    free(sol);
+    free(bestSolM);
+    free(diagonals);
 }
 
 static int checkValidity(int pos, int i, Element *elementi, int **sol, int diag, int ddVal, int dpVal, int dd, int dp)
@@ -228,8 +234,10 @@ int checkSol(int **sol, Element *elementi)
 void calcolateValue(int **sol, Element *elementi, Diagonal *diagonali)
 {
     float diag[MAX_DIAGS];
+    float coeff;
+
+    coeff = 1.0;
     diag[0] = diag[1] = diag[2] = 0.0;
-    float coeff = 1.0;
     for (int i = 0; i < MAX_DIAGS; i++)
     {
         for (int j = 0; j < MAX_ELEM && sol[i][j] != -1; j++)

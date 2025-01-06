@@ -3,20 +3,30 @@
 #include <string.h>
 #include "titoli.h"
 
-struct titolo{
+// DEFINIZIONE: struttura dati per il titolo
+struct titolo
+{
     char name[MAXC];
     BST quotazioni;
 };
 
-// DICHIARAZIONI: struttura dati per l'ADT di prima classe
+// DEFINIZIONE: struttura dati per la collezione di titoli (lista ordinata)
 typedef struct node *link;
-struct node { Titolo val; link next; };
-struct listTitolo { link head; int N; };
+struct node
+{
+    Titolo val;
+    link next;
+};
+struct listTitolo
+{
+    link head;
+    int N;
+};
 
 // FUNCTIONS
 LISTtitolo LISTinit()
 {
-    LISTtitolo l = (LISTtitolo) malloc(sizeof(*l));
+    LISTtitolo l = (LISTtitolo)malloc(sizeof(*l));
     l->head = NULL;
     l->N = 0;
     return l;
@@ -35,7 +45,7 @@ void LISTfree(LISTtitolo l)
     free(l);
 }
 
-link NEW(Titolo val, link next)
+static link NEW(Titolo val, link next)
 {
     link x = malloc(sizeof(*x));
     x->val = val;
@@ -43,7 +53,7 @@ link NEW(Titolo val, link next)
     return x;
 }
 
-link LISTinsertSort(LISTtitolo l, char *name, FILE *fp)
+static link LISTinsertSort(LISTtitolo l, char *name, FILE *fp)
 {
     link x, p;
 
@@ -71,12 +81,14 @@ link LISTinsertSort(LISTtitolo l, char *name, FILE *fp)
     return l->head;
 }
 
-LISTtitolo readfile(FILE *fp, LISTtitolo l){
+LISTtitolo readfile(FILE *fp, LISTtitolo l)
+{
     char name[MAXC];
     int n;
-    
+
     fscanf(fp, "%d", &n);
-    for (int i = 0; i < n; i++){
+    for (int i = 0; i < n; i++)
+    {
         fscanf(fp, "%s", name);
         l->head = LISTinsertSort(l, name, fp);
     }
@@ -84,24 +96,30 @@ LISTtitolo readfile(FILE *fp, LISTtitolo l){
     return l;
 }
 
-void LISTprint(LISTtitolo l){
+void LISTprint(LISTtitolo l)
+{
     link x;
-    for (x = l->head; x != NULL; x = x->next){
+    for (x = l->head; x != NULL; x = x->next)
+    {
         printf("%s\n", x->val->name);
         BSTprint(x->val->quotazioni);
     }
-    if (l->N == 0){
+    if (l->N == 0)
+    {
         printf("Lista vuota!\n");
     }
 }
 
-void searchTitle(LISTtitolo l){
+void searchTitle(LISTtitolo l)
+{
     char name[MAXC];
     link x;
     printf("Inserisci il nome del titolo: ");
     scanf("%s", name);
-    for (x = l->head; x != NULL; x = x->next){
-        if (strcmp(x->val->name, name) == 0){
+    for (x = l->head; x != NULL; x = x->next)
+    {
+        if (strcmp(x->val->name, name) == 0)
+        {
             printf("Titolo trovato!\n");
             BSTprint(x->val->quotazioni);
             return;
@@ -110,7 +128,8 @@ void searchTitle(LISTtitolo l){
     printf("Titolo non trovato!\n");
 }
 
-void searchQuotation(LISTtitolo l){
+void searchQuotation(LISTtitolo l)
+{
     // ricerca quotazione da una certa data (BSTsearch)
     char name[MAXC];
     link x;
@@ -118,11 +137,14 @@ void searchQuotation(LISTtitolo l){
 
     printf("Inserisci il nome del titolo: ");
     scanf("%s", name);
-    for (x = l->head; x != NULL; x = x->next){
-        if (strcmp(x->val->name, name) == 0){
+    for (x = l->head; x != NULL; x = x->next)
+    {
+        if (strcmp(x->val->name, name) == 0)
+        {
             printf("Titolo trovato!\n");
             q = BSTsearch(x->val->quotazioni);
-            if (q.valore != 0){
+            if (q.valore != 0)
+            {
                 printf("Quotazione trovata!\n");
                 QuotazioneStore(q);
             }
@@ -132,48 +154,57 @@ void searchQuotation(LISTtitolo l){
     printf("Titolo non trovato!\n");
 }
 
-void searchQuotationMinMax(LISTtitolo l){
-    // ricerca quotazione minima e massima da una certa data a un'altra (SearchBSTQuotationMINMAXFromRangeDate)
+void searchQuotationMinMax(LISTtitolo l)
+{
+    // ricerca quotazione minima e massima da una certa data a un'altra (searchBSTQuotationMINMAXFromRangeDate)
     char name[MAXC];
     link x;
 
     printf("Inserisci il nome del titolo: ");
     scanf("%s", name);
-    for (x = l->head; x != NULL; x = x->next){
-        if (strcmp(x->val->name, name) == 0){
+    for (x = l->head; x != NULL; x = x->next)
+    {
+        if (strcmp(x->val->name, name) == 0)
+        {
             printf("Titolo trovato!\n");
-            SearchBSTQuotationMINMAXFromRangeDate(x->val->quotazioni);
+            searchBSTQuotationMINMAXFromRangeDate(x->val->quotazioni);
             return;
         }
     }
     printf("Titolo non trovato!\n");
 }
 
-void searchQuotationMinMaxAllPeriod(LISTtitolo l){
-    // ricerca quotazione minima e massima di tutto il periodo (SearchBSTQuotationMINMAXFromAllPeriod)
+void searchQuotationMinMaxAllPeriod(LISTtitolo l)
+{
+    // ricerca quotazione minima e massima di tutto il periodo (searchBSTQuotationMINMAXFromAllPeriod)
     char name[MAXC];
     link x;
 
     printf("Inserisci il nome del titolo: ");
     scanf("%s", name);
-    for (x = l->head; x != NULL; x = x->next){
-        if (strcmp(x->val->name, name) == 0){
+    for (x = l->head; x != NULL; x = x->next)
+    {
+        if (strcmp(x->val->name, name) == 0)
+        {
             printf("Titolo trovato!\n");
-            SearchBSTQuotationMINMAXFromAllPeriod(x->val->quotazioni);
+            searchBSTQuotationMINMAXFromAllPeriod(x->val->quotazioni);
             return;
         }
     }
     printf("Titolo non trovato!\n");
 }
 
-void balanceTree(LISTtitolo l){
+void balanceTree(LISTtitolo l)
+{
     char name[MAXC];
     link x;
 
     printf("Inserisci il nome del titolo: ");
     scanf("%s", name);
-    for (x = l->head; x != NULL; x = x->next){
-        if (strcmp(x->val->name, name) == 0){
+    for (x = l->head; x != NULL; x = x->next)
+    {
+        if (strcmp(x->val->name, name) == 0)
+        {
             printf("Titolo trovato!\n");
             BSTbalance(x->val->quotazioni);
             return;

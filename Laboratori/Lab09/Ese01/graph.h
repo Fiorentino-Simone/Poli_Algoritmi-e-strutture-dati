@@ -6,7 +6,8 @@
 
 #define MAXL 30
 
-typedef struct edge {
+typedef struct edge
+{
     int v, w, wt;
 } Edge;
 
@@ -36,4 +37,4 @@ void GRAPHremoveE(Graph G, int id1, int id2);
 void GRAPHedges(Graph G, Edge *a);
 int GRAPHcount(Graph G);
 
-#endif //ESE01_GRAPH_H
+#endif // ESE01_GRAPH_H

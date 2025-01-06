@@ -22,7 +22,8 @@ typedef enum
 // PROTOTIPI
 comando_e leggi_comando();
 
-int main() {
+int main()
+{
     // DICHIARAZIONI
     int continua;
     comando_e comando;
@@ -42,45 +43,61 @@ int main() {
                 printf("Inserisci il nome del file: ");
                 scanf("%s", filename);
                 fin = fopen(filename, "r");
-                if (fin == NULL){
+                if (fin == NULL)
+                {
                     printf("Errore nell'apertura del file!");
                     exit(1);
                 }
-                l = readfile(fin,l);
+                l = readfile(fin, l);
                 fclose(fin);
                 break;
             case r_ricercaTitolo:
-                if (fin){
+                if (fin)
+                {
                     searchTitle(l);
-                } else {
+                }
+                else
+                {
                     printf("Devi prima leggere il file!");
                 }
                 break;
             case r_ricercaQuotazione:
-                if (fin){
+                if (fin)
+                {
                     searchQuotation(l);
-                } else {
+                }
+                else
+                {
                     printf("Devi prima leggere il file!");
                 }
                 break;
             case r_ricercaQuotazioneMinMaxFromRange:
-                if (fin){
+                if (fin)
+                {
                     searchQuotationMinMax(l);
-                } else {
+                }
+                else
+                {
                     printf("Devi prima leggere il file!");
                 }
                 break;
             case r_ricercaQuotazioneMinMaxFromAllPeriod:
-                if (fin){
+                if (fin)
+                {
                     searchQuotationMinMaxAllPeriod(l);
-                } else {
+                }
+                else
+                {
                     printf("Devi prima leggere il file!");
                 }
                 break;
             case r_bilanciamentoAlberoQuotazioni:
-                if (fin){
+                if (fin)
+                {
                     balanceTree(l);
-                } else {
+                }
+                else
+                {
                     printf("Devi prima leggere il file!");
                 }
                 break;

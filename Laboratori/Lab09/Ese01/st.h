@@ -18,4 +18,4 @@ void STinsert(ST st, char *vertex, int index);
 // ricerca per indice
 char *STsearchByIndex(ST st, int index);
 
-#endif //ESE01_ST_H
+#endif // ESE01_ST_H

@@ -5,13 +5,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct{
+typedef struct
+{
     Datetime data;
     float valore;
     int quantita;
 } Quotazione; // Quasi ADT
 
-typedef struct  binarysearchtree *BST; // ADT di 1^classe
+typedef struct binarysearchtree *BST; // ADT di 1^classe
 
 // PROTITPI
 
@@ -32,11 +33,11 @@ void BSTinsert_leafR(BST bst, Quotazione x);
 Quotazione BSTnodeUpdate(Quotazione item, Quotazione k);
 Quotazione BSTsearch(BST bst);
 
-void SearchBSTQuotationMINMAXFromRangeDate(BST bst);
-void SearchBSTQuotationMINMAXFromAllPeriod(BST bst);
+void searchBSTQuotationMINMAXFromRangeDate(BST bst);
+void searchBSTQuotationMINMAXFromAllPeriod(BST bst);
 
 void BSTbalance(BST bst);
 int AltezzaAlberoMassimaWrapper(BST bst);
 int AltezzaAlberoMinimaWrapper(BST bst);
 
-#endif //ESE01_QUOTAZIONI_H
+#endif // ESE01_QUOTAZIONI_H

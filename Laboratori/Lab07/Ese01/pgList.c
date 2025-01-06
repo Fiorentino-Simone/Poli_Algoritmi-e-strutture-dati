@@ -81,6 +81,7 @@ void pgList_free(pgList_t pgList)
     while (pgList->headPg != NULL)
     {
         temp = pgList->headPg;
+        pg_clean(&(temp->val));
         pgList->headPg = pgList->headPg->next;
         free(temp);
     }

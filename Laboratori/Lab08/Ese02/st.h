@@ -25,4 +25,4 @@ int STsearchByName(ST st, char *name);
 // ordinamento
 void STsort(ST st, int *a);
 
-#endif //ESE02_ST_H
+#endif // ESE02_ST_H

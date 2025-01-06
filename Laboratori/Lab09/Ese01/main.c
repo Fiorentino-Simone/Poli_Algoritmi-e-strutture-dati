@@ -20,9 +20,10 @@ typedef enum
 // PROTOTIPI
 comando_e leggi_comando();
 
-int main() {
+int main()
+{
     // DICHIARAZIONI
-    int continua;
+    int continua, dagCreated;
     comando_e comando;
     Graph G;
     char filename[MAXL];
@@ -30,6 +31,7 @@ int main() {
     Edge *backEdges;
 
     continua = 1;
+    dagCreated = 0;
     fin = NULL;
     G = NULL;
 
@@ -42,7 +44,8 @@ int main() {
                 printf("Inserisci il nome del file: ");
                 scanf("%s", filename);
                 fin = fopen(filename, "r");
-                if (fin == NULL){
+                if (fin == NULL)
+                {
                     printf("Errore nell'apertura del file!");
                     exit(1);
                 }
@@ -51,15 +54,32 @@ int main() {
                 fclose(fin);
                 break;
             case r_individuaArchiCardMin:
+                if (G == NULL)
+                {
+                    printf("Devi prima caricare il grafo!");
+                    break;
+                }
                 backEdges = malloc(GRAPHcount(G) * sizeof(Edge));
-                for (int i = 0; i < GRAPHcount(G); i++) {
+                for (int i = 0; i < GRAPHcount(G); i++)
+                {
                     GRAPHfindBackEdges(G, i, backEdges);
                 }
                 break;
             case r_creaDAG:
+                if (G == NULL)
+                {
+                    printf("Devi prima caricare il grafo!");
+                    break;
+                }
                 DAGcreate(G, backEdges);
+                dagCreated = 1;
                 break;
             case r_camminoMassimo:
+                if (dagCreated == 0)
+                {
+                    printf("Devi prima creare il DAG!");
+                    break;
+                }
                 DAGpathMax(G);
                 break;
             case r_fine:
@@ -86,8 +106,7 @@ comando_e leggi_comando()
         "individua_archi_card_min",
         "crea_dag",
         "cammino_massimo",
-        "fine"
-    };
+        "fine"};
 
     printf("Inserisci uno tra questi comandi \n(leggi_file, \n individua_archi_card_min, \n crea_dag, \n cammino_massimo, \n fine): ");
     scanf("%s", cmd);

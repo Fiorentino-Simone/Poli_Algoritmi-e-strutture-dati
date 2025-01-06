@@ -4,10 +4,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include "invArray.h"
 
 #define EQUIP_SLOT 8
 
-#include "invArray.h"
 
 /* ADT di prima classe collezione di oggetti di equipaggiamento */
 typedef struct equipArray_s *equipArray_t;

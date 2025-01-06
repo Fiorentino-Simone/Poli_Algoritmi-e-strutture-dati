@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <string.h>
 #include <stdio.h>
 
 #include "pgList.h"
@@ -94,6 +93,9 @@ int main(int argc, char **argv)
             {
                 pg_print(stdout, pgp, invArray);
             }
+            else {
+                printf("Il codice inserito %s non ha portato a nessun personaggio in lista", codiceRicerca);
+            }
         }
         break;
 
@@ -144,6 +146,7 @@ int main(int argc, char **argv)
     } while (!fineProgramma);
 
     pgList_free(pgList);
+    invArray_free(invArray);
 
     return 0;
 }
