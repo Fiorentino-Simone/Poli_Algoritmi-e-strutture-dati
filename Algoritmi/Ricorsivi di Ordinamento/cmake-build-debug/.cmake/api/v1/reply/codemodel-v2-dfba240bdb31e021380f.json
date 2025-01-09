@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.27"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Ricorsivi_di_Ordinamento",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Ricorsivi_di_Ordinamento::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Ricorsivi_di_Ordinamento-Debug-2dec5d55819ebedaa126.json",
+					"name" : "Ricorsivi_di_Ordinamento",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/UNI/2^ANNO/Algoritmi e strutture dati/Algoritmi/Ricorsivi di Ordinamento/cmake-build-debug",
+		"source" : "D:/UNI/2^ANNO/Algoritmi e strutture dati/Algoritmi/Ricorsivi di Ordinamento"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

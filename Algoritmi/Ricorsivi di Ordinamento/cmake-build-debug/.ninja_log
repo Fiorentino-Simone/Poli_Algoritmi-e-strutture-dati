@@ -1,0 +1,13 @@
+# ninja log v5
+96	190	7581189113200104	Ricorsivi_di_Ordinamento.exe	1a96970412ef9e70
+1	67	7581189112010510	CMakeFiles/Ricorsivi_di_Ordinamento.dir/RecursiveSorting.c.obj	9ddcd328970cb853
+0	150	7581189149305855	build.ninja	eb317d801a02aa63
+2	78	7581186580455173	CMakeFiles/Ricorsivi_di_Ordinamento.dir/Item.c.obj	92e3f62b6265113e
+4	96	7581189112300045	CMakeFiles/Ricorsivi_di_Ordinamento.dir/main.c.obj	8d93aaaa41c01262
+10	225	7581364707095540	CMakeFiles/Ricorsivi_di_Ordinamento.dir/RecursiveSorting.c.obj	9ddcd328970cb853
+3	238	7581364707195546	CMakeFiles/Ricorsivi_di_Ordinamento.dir/main.c.obj	8d93aaaa41c01262
+2	79	7581364940167756	CMakeFiles/Ricorsivi_di_Ordinamento.dir/RecursiveSorting.c.obj	9ddcd328970cb853
+6	89	7581364940267833	CMakeFiles/Ricorsivi_di_Ordinamento.dir/main.c.obj	8d93aaaa41c01262
+2	91	7581365993602731	CMakeFiles/Ricorsivi_di_Ordinamento.dir/RecursiveSorting.c.obj	9ddcd328970cb853
+6	91	7581365993602731	CMakeFiles/Ricorsivi_di_Ordinamento.dir/main.c.obj	8d93aaaa41c01262
+91	166	7581365994338207	Ricorsivi_di_Ordinamento.exe	1a96970412ef9e70
