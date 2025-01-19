@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "d:/UNI/2^ANNO/Algoritmi e strutture dati/Algoritmi/Programmazione Dinamica/LIS/cmake-build-debug"
+			"value" : "d:/UNI/2^ANNO/Algoritmi e strutture dati/Prove d'esame/soluzioni/2015-02-23/12 punti/es3/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -431,7 +431,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/UNI/2^ANNO/Algoritmi e strutture dati/Algoritmi/Programmazione Dinamica/LIS/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "D:/UNI/2^ANNO/Algoritmi e strutture dati/Prove d'esame/soluzioni/2015-02-23/12 punti/es3/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -503,7 +503,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "D:/UNI/2^ANNO/Algoritmi e strutture dati/Algoritmi/Programmazione Dinamica/LIS"
+			"value" : "D:/UNI/2^ANNO/Algoritmi e strutture dati/Prove d'esame/soluzioni/2015-02-23/12 punti/es3"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -515,7 +515,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "C:/Program Files (x86)/LIS"
+			"value" : "C:/Program Files (x86)/es3"
 		},
 		{
 			"name" : "CMAKE_LINKER",
@@ -731,7 +731,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "LIS"
+			"value" : "es3"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1126,7 +1126,19 @@
 			"value" : "FALSE"
 		},
 		{
-			"name" : "LIS_BINARY_DIR",
+			"name" : "_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "linker supports push/pop state"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "TRUE"
+		},
+		{
+			"name" : "es3_BINARY_DIR",
 			"properties" : 
 			[
 				{
@@ -1135,10 +1147,10 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/UNI/2^ANNO/Algoritmi e strutture dati/Algoritmi/Programmazione Dinamica/LIS/cmake-build-debug"
+			"value" : "D:/UNI/2^ANNO/Algoritmi e strutture dati/Prove d'esame/soluzioni/2015-02-23/12 punti/es3/cmake-build-debug"
 		},
 		{
-			"name" : "LIS_IS_TOP_LEVEL",
+			"name" : "es3_IS_TOP_LEVEL",
 			"properties" : 
 			[
 				{
@@ -1150,7 +1162,7 @@
 			"value" : "ON"
 		},
 		{
-			"name" : "LIS_SOURCE_DIR",
+			"name" : "es3_SOURCE_DIR",
 			"properties" : 
 			[
 				{
@@ -1159,19 +1171,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/UNI/2^ANNO/Algoritmi e strutture dati/Algoritmi/Programmazione Dinamica/LIS"
-		},
-		{
-			"name" : "_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "linker supports push/pop state"
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "TRUE"
+			"value" : "D:/UNI/2^ANNO/Algoritmi e strutture dati/Prove d'esame/soluzioni/2015-02-23/12 punti/es3"
 		}
 	],
 	"kind" : "cache",

@@ -4,6 +4,10 @@
     - Traccia da 12 punti:
         - es3: Ristorante con principio di moltiplicazione
 
+- 23-02-2015
+    - Traccia da 12 punti:
+        - es3: Generazione di tutte le passoword (con 3 lettere alfabetiche + 2 cifre)
+
 - 31-01-2019
     - Traccia da 12 punti:
         - es3: Algoritmo di ER per trovare dei blocchi
