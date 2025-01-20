@@ -31,3 +31,5 @@
 - 21-02-2020
     - Traccia da 12 punti:
         - es3: Ricerca di stringhe mutualmente disgiunte (powerset di matrici di char)
+    - Traccia da 18 punti:
+        - Ristorante con comb_sempl e BST
