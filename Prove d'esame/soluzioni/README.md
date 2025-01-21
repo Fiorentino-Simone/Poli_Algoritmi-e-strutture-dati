@@ -10,7 +10,11 @@
 
 - 31-01-2019
     - Traccia da 12 punti:
+        - es1: minMaxDiff della Matrice
+        - es2: creare funzione Splice nella LIST
         - es3: Algoritmo di ER per trovare dei blocchi
+    - Traccia da 18 punti:
+        - Kernel di un Graph
 
 - 22-02-2019
     - Traccia da 12 punti:
