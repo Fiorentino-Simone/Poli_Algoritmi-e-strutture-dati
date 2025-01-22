@@ -19,10 +19,14 @@
 - 22-02-2019
     - Traccia da 12 punti:
         - es3: Sequenza Alternata (LIS modificata)
+    - Traccia da 18 punti:
+        - Progetto strutturale (da fare)
 
 - 02-07-2019
     - Traccia da 12 punti:
         - es3: Sequenza Bicotomica (LIS modificata)
+    - Traccia da 18 punti:
+        - Matrici con funzioni obbiettivo
 
 - 18-09-2019
     - Traccia da 12 punti:
