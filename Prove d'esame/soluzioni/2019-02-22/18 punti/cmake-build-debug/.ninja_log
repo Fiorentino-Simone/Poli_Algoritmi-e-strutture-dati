@@ -1,0 +1,24 @@
+# ninja log v5
+8	90	7592778848956825	CMakeFiles/18_punti.dir/dipendente.c.obj	8c9952f349eea7d2
+90	157	7592778849612451	18_punti.exe	95c81eeb59a9ccf3
+2	66	7592778848726820	CMakeFiles/18_punti.dir/main.c.obj	9116c48e6003c80f
+5	88	7592778848936809	CMakeFiles/18_punti.dir/divisione.c.obj	3fd3f6c0c78dc884
+12	89	7592778848946812	CMakeFiles/18_punti.dir/dipendenti.c.obj	3dbfe73a551efb7
+1	97	7592784186786292	CMakeFiles/18_punti.dir/main.c.obj	9116c48e6003c80f
+9	108	7592784186896682	CMakeFiles/18_punti.dir/divisione.c.obj	3fd3f6c0c78dc884
+5	112	7592784186906688	CMakeFiles/18_punti.dir/dipendente.c.obj	8c9952f349eea7d2
+15	116	7592784187020803	CMakeFiles/18_punti.dir/dipendenti.c.obj	3dbfe73a551efb7
+12	117	7592784187010814	CMakeFiles/18_punti.dir/divisioni.c.obj	14baaf38c8b4193d
+118	190	7592784187701188	18_punti.exe	ab96f7616864fc00
+3	88	7592784763169399	CMakeFiles/18_punti.dir/main.c.obj	9116c48e6003c80f
+6	93	7592784763279854	CMakeFiles/18_punti.dir/dipendente.c.obj	8c9952f349eea7d2
+9	106	7592784763414973	CMakeFiles/18_punti.dir/divisione.c.obj	3fd3f6c0c78dc884
+16	107	7592784763414973	CMakeFiles/18_punti.dir/divisioni.c.obj	14baaf38c8b4193d
+12	110	7592784763444978	CMakeFiles/18_punti.dir/dipendenti.c.obj	3dbfe73a551efb7
+110	181	7592784764115203	18_punti.exe	ab96f7616864fc00
+2	91	7592785002682586	CMakeFiles/18_punti.dir/main.c.obj	9116c48e6003c80f
+9	102	7592785002787764	CMakeFiles/18_punti.dir/dipendente.c.obj	8c9952f349eea7d2
+6	108	7592785002857709	CMakeFiles/18_punti.dir/divisione.c.obj	3fd3f6c0c78dc884
+13	115	7592785002938262	CMakeFiles/18_punti.dir/dipendenti.c.obj	3dbfe73a551efb7
+17	119	7592785002987691	CMakeFiles/18_punti.dir/divisioni.c.obj	14baaf38c8b4193d
+119	191	7592785003677928	18_punti.exe	ab96f7616864fc00
