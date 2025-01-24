@@ -172,10 +172,13 @@ static int isVertexKernel(int v, int *sol, int k){
     return 0;
 }
 
-static void pathR(Graph G, int *sol, int k, int *maxNodi, int *visited, int v, int w, int cnt){
+static void pathR(Graph G, int *sol, int k, int *maxNodi, int *visited, int v, int w, int cnt, int *path, int *bestPath){
     if (v == w){
         if(cnt > *(maxNodi)){
             (*maxNodi) = cnt;
+            for (int i = 0; i < G->V; i++) {
+                bestPath[i] = path[i];
+            }
         }
         return;
     }
@@ -185,32 +188,39 @@ static void pathR(Graph G, int *sol, int k, int *maxNodi, int *visited, int v, i
         cnt++;
     }
     visited[v] = 1;
-    for (int i = 0; i < G->V; i++) {
-        if(G->matradj[v][i] == 1){
-            if(visited[i] == 0){
-                pathR(G, sol, k, maxNodi, visited, v, w, cnt);
+    path[v] = 1;
+    for (int t = 0; t < G->V; t++) {
+        if(G->matradj[v][t] == 1){
+            if(visited[t] == 0){
+                pathR(G, sol, k, maxNodi, visited, t, w, cnt, path, bestPath);
             }
         }
     }
+    path[v] = 0;
     visited[v] = 0;
 }
 
 static void GRAPHpath(Graph G, int *sol, int k){
-    int *visited;
+    int *visited, *path, *bestPath;
     int maxNodi = 0;
     int cnt = 0;
-
-    //TODO: da rivedere
-
-
     visited = calloc(G->V, sizeof (int));
+    path = malloc(G->V * sizeof (int));
+    bestPath = malloc(G->V * sizeof (int));
+    
     for (int v = 0; v < G->V; v++) {
         for (int w = 0; w < G->V; w++) {
-            pathR(G, sol, k, &maxNodi, visited, v, w, cnt);
+            pathR(G, sol, k, &maxNodi, visited, v, w, cnt, path, bestPath);
         }
     }
 
     printf("\nIl cammino semplice che attraversa il maggior numero di nodi del kernel passa per %d nodi del kernel.\n", maxNodi);
+    printf("\n");
+    for (int i = 0; i < G->V; i++) {
+        if(bestPath[i] == 1){
+            printf(" %s ", STsearchById(G->table, i));
+        }
+    }
     free(visited);
 }
 

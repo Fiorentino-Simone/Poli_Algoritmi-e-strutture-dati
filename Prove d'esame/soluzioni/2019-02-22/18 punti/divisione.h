@@ -11,6 +11,11 @@ typedef struct {
     int r;
 } Statistiche;
 
+typedef struct {
+    Dipendente dip;
+    int mansione;
+} Associazione;
+
 typedef struct divisione_t *Divisione;
 
 // PROTOTIPI

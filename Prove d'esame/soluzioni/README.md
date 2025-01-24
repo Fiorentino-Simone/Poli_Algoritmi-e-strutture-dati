@@ -20,7 +20,7 @@
     - Traccia da 12 punti:
         - es3: Sequenza Alternata (LIS modificata)
     - Traccia da 18 punti:
-        - Progetto strutturale (da fare)
+        - Progetto strutturale (da finire)
 
 - 02-07-2019
     - Traccia da 12 punti:
@@ -41,3 +41,13 @@
         - es3: Ricerca di stringhe mutualmente disgiunte (powerset di matrici di char)
     - Traccia da 18 punti:
         - Ristorante con comb_sempl e BST
+
+- 30-06-2023
+    - Traccia da 12 punti:
+        - es1: elaborazioni con matrice r x c (difficile)
+        - es2: elimino nodi % 3 da una Lista
+        - es3: partizioni con ER (difficile)
+
+- 20-09-2023
+    - Traccia da 12 punti:
+        - es1: elaborazioni con matrice r x c

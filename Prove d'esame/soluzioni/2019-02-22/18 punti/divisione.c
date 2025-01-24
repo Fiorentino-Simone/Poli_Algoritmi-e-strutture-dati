@@ -5,6 +5,10 @@
 struct divisione_t {
     char sigla[MAXL];
     Statistiche statistiche[N];
+
+    // Associazioni
+    Associazione *associazioni;
+    int dimA, maxDimA;
 };
 
 Divisione DIVISIONEinit(){
@@ -30,4 +34,8 @@ void DIVISIONEprint(Divisione d){
     for (int i = 0; i < N; i++) {
         printf("%d %d %d\n", d->statistiche[i].m, d->statistiche[i].cmin, d->statistiche[i].r);
     }
+}
+
+char *DIVISIONEgetSigla(Divisione d){
+    return d->sigla;
 }

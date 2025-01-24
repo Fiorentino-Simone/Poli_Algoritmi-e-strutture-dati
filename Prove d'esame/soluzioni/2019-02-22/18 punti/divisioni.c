@@ -29,3 +29,16 @@ void DIVISIONIprint(Divisioni div){
         DIVISIONEprint(div->divisioni[i]);
     }
 }
+
+Divisione DIVISIONIgetDivisione(Divisioni d, int index){
+    return d->divisioni[index];
+}
+
+int DIVISIONIsearch(Divisioni d, char *sigla){
+    int i;
+    for(i=0; i<d->nDivisioni; i++){
+        if(strcmp(sigla, DIVISIONEgetSigla(d->divisioni[i]))==0)
+            return i;
+    }
+    return -1;
+}
