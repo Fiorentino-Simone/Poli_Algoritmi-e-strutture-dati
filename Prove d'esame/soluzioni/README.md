@@ -42,6 +42,10 @@
     - Traccia da 18 punti:
         - Ristorante con comb_sempl e BST
 
+- 07-02-2023
+    - Traccia da 18 punti:
+        - Matrice con gioco Hacking
+
 - 11-05-2023
     - Traccia da 18 punti:
         - Grafo dove controllare e trovare la triangle packing
