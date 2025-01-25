@@ -42,12 +42,19 @@
     - Traccia da 18 punti:
         - Ristorante con comb_sempl e BST
 
+- 11-05-2023
+    - Traccia da 18 punti:
+        - Grafo dove controllare e trovare la triangle packing
+
 - 30-06-2023
     - Traccia da 12 punti:
         - es1: elaborazioni con matrice r x c (difficile)
         - es2: elimino nodi % 3 da una Lista
-        - es3: partizioni con ER (difficile)
 
 - 20-09-2023
     - Traccia da 12 punti:
         - es1: elaborazioni con matrice r x c
+
+- ?-01-2024
+    - Traccia da 18 punti:
+        - Grafo con vertici pesati e archi non pesati

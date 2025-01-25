@@ -1,0 +1,14 @@
+# ninja log v5
+1	160	7595003480299150	build.ninja	e223d50b7f07ad03
+8	88	7595003482169854	CMakeFiles/18_punti.dir/main.c.obj	8e5e485ba542b5ec
+5	114	7595003482435036	CMakeFiles/18_punti.dir/ST.c.obj	b593a97899fdb7c6
+1	120	7595003482495412	CMakeFiles/18_punti.dir/Graph.c.obj	419e160a505d1ff2
+120	253	7595003483790219	18_punti.exe	678ab7e8ecb59e4a
+8	82	7595003760519987	CMakeFiles/18_punti.dir/main.c.obj	8e5e485ba542b5ec
+11	84	7595003760539978	CMakeFiles/18_punti.dir/ST.c.obj	b593a97899fdb7c6
+3	97	7595003760679987	CMakeFiles/18_punti.dir/Graph.c.obj	419e160a505d1ff2
+97	172	7595003761385752	18_punti.exe	678ab7e8ecb59e4a
+7	76	7595005201646465	CMakeFiles/18_punti.dir/main.c.obj	8e5e485ba542b5ec
+10	83	7595005201696479	CMakeFiles/18_punti.dir/ST.c.obj	b593a97899fdb7c6
+2	99	7595005201861671	CMakeFiles/18_punti.dir/Graph.c.obj	419e160a505d1ff2
+99	191	7595005202751729	18_punti.exe	678ab7e8ecb59e4a
