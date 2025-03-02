@@ -1,0 +1,5 @@
+# ninja log v5
+6	79	7596110485560760	CMakeFiles/18_punti.dir/main.c.obj	5eaf26c6f873b382
+9	85	7596110485630760	CMakeFiles/18_punti.dir/DistMatr.c.obj	638aa21f3a4535a3
+2	89	7596110485670816	CMakeFiles/18_punti.dir/Elenco.c.obj	66372d42563c7a2a
+89	162	7596110486365899	18_punti.exe	c661a4b89941db56

@@ -53,7 +53,7 @@ static link NEW(int v, int wt, link next)
 
 Graph GRAPHinit(int V)
 {
-    GraphG = malloc(sizeof *G);
+    Graph G = malloc(sizeof *G);
     G->V = V;
     G->E = 0;
 
@@ -142,7 +142,7 @@ static Edge EDGEcreate(int v, int w, int wt)
     return e;
 }
 
-static void insertE(GraphG, Edgee)
+static void insertE(Graph G, Edge e)
 {
     int v = e.v, w = e.w, wt = e.wt;
 
@@ -291,7 +291,7 @@ static int pathR(Graph G, int v, int w, int *visited)
 
 void GRAPHpath(Graph G, int id1, int id2)
 {
-    int t, found, *visited;
+    int found, *visited;
     visited = calloc(G->V, sizeof(int));
     if (id1 == -1 || id2 == -1)
         return;
@@ -402,6 +402,7 @@ static void dfsR(Graph G, Edge e, int *time, int *pre, int *post, int *st)
 
 void GRAPHdfs(Graph G, int id)
 {
+    // visita in profondità (dfs): visita tutti i vertici del grafo
     int v, time = 0, *pre, *post, *st;
 
     pre = malloc(G->V * sizeof(int));

@@ -16,21 +16,25 @@
     - Traccia da 18 punti:
         - Kernel di un Graph
 
-- 22-02-2019
+- 22-02-2019 (x)
     - Traccia da 12 punti:
+        - es1: sottovettore con valore massimo
+        - es2: albero grado k con maxSomma Nodi
         - es3: Sequenza Alternata (LIS modificata)
     - Traccia da 18 punti:
         - Progetto strutturale (da finire)
 
-- 02-07-2019
+- 02-07-2019 (x)
     - Traccia da 12 punti:
+        - es1: costruzione matrice con diagonali crescenti
+        - es2: purgeList (finito ma da riguardare)
         - es3: Sequenza Bicotomica (LIS modificata)
     - Traccia da 18 punti:
         - Matrici con funzioni obbiettivo
 
 - 18-09-2019
     - Traccia da 12 punti:
-        - es3: Ricerca di un MST (Algoritmo MST con powerset)
+        - es3: Ricerca di un MST (Algoritmo MST con powerset -- Difficile)
 
 - 28-01-2020
     - Traccia da 12 punti:
@@ -41,6 +45,20 @@
         - es3: Ricerca di stringhe mutualmente disgiunte (powerset di matrici di char)
     - Traccia da 18 punti:
         - Ristorante con comb_sempl e BST
+
+- 27-01-2022 (x)
+    - Traccia da 12 punti:
+      - Manipolazione su matrici
+      - Verificare che un albero binario sia un BST
+      - Algoritmo di ER per gruppi di persone
+
+- 09-02-2022
+    - Traccia da 18 punti:
+       - Matrice con labirinto
+
+- 27-06-2022 (x)
+    - Traccia da 12 punti:
+      - Matrici tridimensionali (difficile [rowBlock e colBlock])
 
 - 07-02-2023
     - Traccia da 18 punti:

@@ -8,7 +8,7 @@ struct STnode
     link next;
 };
 
-struct symbtab
+struct symboltable
 {
     link *heads; // vettore di liste (M) con nodo sentinella in coda, se avessi l'open addressing sarebbe un vettore di item
     int N;       // numero di elementi in tabella
